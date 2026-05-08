@@ -1,5 +1,5 @@
 ---
-name: dp-mst-dpcd-parser
+name: dp-dpcd-parser
 description: Parse DisplayPort MST DPCD and Sideband Message logs from kernel drm subsystem. Use this skill whenever the user provides kernel log output containing AUX transactions, DPCD reads/writes, or MST sideband messages (look for patterns like "drm_dp_dpcd_read", "drm_dp_dpcd_write", "AUX ->", "AUX <-"). This skill handles both single-packet and multi-packet MST message transactions.
 ---
 
@@ -90,6 +90,98 @@ python3 parse_dpcd_log.py --format=hex_dump --base-addr=0x00200 dump.txt
 **Use the script** for: All DPCD register decoding, MST message extraction, multi-packet assembly, all 14 MT type detail parsing, CRC validation, topology tree generation, request/reply pairing, error detection.
 
 **Manual analysis needed for**: EDID decoding, root-causing NAK reasons, cross-referencing with hardware behavior.
+
+## Output Requirements
+
+**IMPORTANT**: When running the script, **always include the complete parsed output** in your response:
+1. Copy the **full script output** (LOG SUMMARY, KEY FINDINGS, and SEQUENTIAL LOG ENTRIES sections)
+2. Do NOT summarize or truncate the detailed register/MST decoding
+3. After presenting the full output, provide a concise analysis summary highlighting key findings
+4. If the output is very long, you may omit repetitive entries but must include at least one complete example of each access type (DPCD read/write, MST message, ESI, etc.)
+
+## Demo Example
+
+### Input Log (drm_dp_dump format)
+```
+[  123.456] 27e40000.dp: 0x02003 AUX -> (ret= 16) 30 00
+[  123.457] 27e40000.dp: 0x01400 AUX -> (ret= 16) 10 21 0e 00 6d d8 5d c4 01 78 80 70 00 30 f0 00
+[  123.460] 27e40000.dp: 0x01410 AUX -> (ret=  7) 0f 07 00 e2 00 6a e3
+```
+
+### Script Output (with detailed decoding)
+```
+============================================================
+LOG SUMMARY
+============================================================
+Total entries: 3
+  DPCD register accesses: 0
+  ESI accesses: 1
+  MST sideband messages: 2
+  Reads: 3, Writes: 0
+  Time span: 123.456000s - 123.460000s
+MST messages parsed: 1
+  DOWN_REP ACK ? (2 pkt)
+
+============================================================
+KEY FINDINGS
+============================================================
+CRC errors: 1
+  pkt1: body CRC8 mismatch
+
+============================================================
+SEQUENTIAL LOG ENTRIES (per-entry with decoding)
+============================================================
+  [  123.456] 27e40000.dp: 0x02003 AUX -> (ret= 16) 30 00
+  0x02003 (DEVICE_SERVICE_IRQ_VECTOR_ESI0): 0x30
+      -bit[6] SINK_SPECIFIC_IRQ: 0
+      -bit[5] UP_REQ_MSG_RDY: 1 (read UP_REQ_MSG)
+      -bit[4] DOWN_REP_MSG_RDY: 1 (read DOWN_REP_MSG)
+      -bit[3] MCCS_IRQ: 0
+      -bit[2] CP_IRQ: 0
+      -bit[1] AUTOMATED_TEST_REQUEST: 0
+      -bit[0] RESERVED: 0
+  0x02004 (DEVICE_SERVICE_IRQ_VECTOR_ESI1): 0x00
+      -bit[2] CEC_IRQ: 0
+      -bit[1] LOCK_ACQUISITION_REQUEST: 0
+      -bit[0] RX_GTC_PRIMARY_REQ_STATUS_CHANGE: 0
+
+  [  123.457] 27e40000.dp: 0x01400 AUX -> (ret= 16) 10 21 0e 00 6d d8 5d c4 01 78 80 70 00 30 f0 00
+  Packet 1/2 (MIDDLE):
+    Header: LCT=1 LCR=0 RAD=[] BC=0 Path=0 BodyLen=33 SMT=0 EMT=0 MSN=0 CRC4=0xe [BODY_CRC8_FAIL]
+    Body data: 00 6d d8 5d c4 01 78 80 70 00 30 f0 00
+
+  [  123.460] 27e40000.dp: 0x01410 AUX -> (ret=  7) 0f 07 00 e2 00 6a e3
+  Packet 2/2 (MIDDLE):
+    Header: LCT=0 LCR=0 RAD=[] BC=0 Path=0 BodyLen=0 SMT=0 EMT=0 MSN=0 CRC4=0x0
+  ── MST Sideband Message (DOWN_REP 0x01400) ──
+  DOWN_REP (0x01400) -> Source reads [Reply]
+  Multi-packet message: 2 packets
+  Packet 1/2 (MIDDLE):
+    Header (byte positions):
+      Byte 0 [7:4] LCT=1, [3:0] LCR=0
+      Byte 1..N-2 [(none)] RAD=[]
+      Byte N-2 [7] BC=0 [6] Path=0 [5:0] BodyLen=33
+      Byte N-1 [7] SMT=0 [6] EMT=0 [4] MSN=0 [3:0] CRC4=0xe [BODY_CRC8_FAIL]
+    Body data: 00 6d d8 5d c4 01 78 80 70 00 30 f0 00
+  Packet 2/2 (MIDDLE):
+    Header (byte positions):
+      Byte 0 [7:4] LCT=0, [3:0] LCR=0
+      Byte 1..N-2 [(none)] RAD=[]
+      Byte N-2 [7] BC=0 [6] Path=0 [5:0] BodyLen=0
+      Byte N-1 [7] SMT=0 [6] EMT=0 [4] MSN=0 [3:0] CRC4=0x0
+  Assembled MT (13 bytes):
+    00 6d d8 5d c4 01 78 80 70 00 30 f0 00
+  MT Byte[0]: [7] reply=0 (ACK), [6:0] request_id=0x00 (GET_MESSAGE_TRANSACTION_VERSION)
+  Reply: ACK, Request: GET_MESSAGE_TRANSACTION_VERSION (0x00)
+    GET_MESSAGE_TRANSACTION_VERSION ACK detail:
+      Version[Byte[0]7:0]: 0x00 (unknown)
+```
+
+### Analysis Summary
+- **ESI 中断**: 0x02003=0x30, bit[5]=1 (UP_REQ_MSG_RDY), bit[4]=1 (DOWN_REP_MSG_RDY)
+- **MST 消息**: DOWN_REP buffer 读取，但 SMT/EMT 组合不合法 (0/0=MIDDLE)，缺少 START packet
+- **CRC 错误**: Body CRC8 校验失败，数据不完整
+- **根因**: Source 轮询 ESI 不及时，DOWN_REP buffer 被覆盖导致 START packet 丢失
 
 ## Output Format
 

@@ -918,7 +918,7 @@ def _parse_remote_dpcd_read_ack(reader):
     n_read, nr_spec = reader.read_byte()
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
     lines.append(f"    Bytes_Read[{nr_spec}]: {n_read}")
-    data = reader.read_bytes(min(n_read, reader.remaining_bits() // 8))
+    data, _ = reader.read_bytes(min(n_read, reader.remaining_bits() // 8))
     if data:
         data_hex = " ".join(f"{b:02x}" for b in data)
         lines.append(f"    Data: {data_hex}")
@@ -936,7 +936,7 @@ def _parse_remote_dpcd_write_request(reader):
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
     lines.append(f"    DPCD_Address[{addr_spec}]: 0x{dpcd_addr:05x}")
     lines.append(f"    Bytes_To_Write[{nb_spec}]: {n_bytes}")
-    data = reader.read_bytes(min(n_bytes, reader.remaining_bits() // 8))
+    data, _ = reader.read_bytes(min(n_bytes, reader.remaining_bits() // 8))
     if data:
         data_hex = " ".join(f"{b:02x}" for b in data)
         lines.append(f"    Data: {data_hex}")
@@ -968,10 +968,10 @@ def _parse_remote_i2c_read_request(reader):
         if reader.remaining_bits() < 16:
             break
         reader.read_bits(1)
-        dev_id = reader.read_bits(7)
-        n_write = reader.read_byte()
+        dev_id, _ = reader.read_bits(7)
+        n_write, _ = reader.read_byte()
         lines.append(f"    I2C_Write[{i}]: Device=0x{dev_id:02x} Bytes={n_write}")
-        write_data = reader.read_bytes(min(n_write, reader.remaining_bits() // 8))
+        write_data, _ = reader.read_bytes(min(n_write, reader.remaining_bits() // 8))
         if write_data:
             lines.append(f"    I2C_Write_Data[{i}]: {' '.join(f'{b:02x}' for b in write_data)}")
         if reader.remaining_bits() < 8:
@@ -982,8 +982,8 @@ def _parse_remote_i2c_read_request(reader):
     if reader.remaining_bits() < 16:
         return lines
     reader.read_bits(1)
-    dev_id = reader.read_bits(7)
-    n_read = reader.read_byte()
+    dev_id, _ = reader.read_bits(7)
+    n_read, _ = reader.read_byte()
     lines.append(f"    I2C_Read: Device=0x{dev_id:02x} Bytes={n_read}")
     return lines
 
@@ -998,7 +998,7 @@ def _parse_remote_i2c_read_ack(reader):
     n_read, nr_spec = reader.read_byte()
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
     lines.append(f"    Bytes_Read[{nr_spec}]: {n_read}")
-    data = reader.read_bytes(min(n_read, reader.remaining_bits() // 8))
+    data, _ = reader.read_bytes(min(n_read, reader.remaining_bits() // 8))
     for chunk_start in range(0, len(data), 16):
         chunk = data[chunk_start:chunk_start + 16]
         lines.append(f"    Data[{chunk_start:3d}]: {' '.join(f'{b:02x}' for b in chunk)}")
@@ -1019,7 +1019,7 @@ def _parse_remote_i2c_write_request(reader):
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
     lines.append(f"    I2C_Device[{dev_spec}]: 0x{dev_id:02x}")
     lines.append(f"    Bytes_To_Write[{nw_spec}]: {n_write}")
-    data = reader.read_bytes(min(n_write, reader.remaining_bits() // 8))
+    data, _ = reader.read_bytes(min(n_write, reader.remaining_bits() // 8))
     if data:
         lines.append(f"    Data: {' '.join(f'{b:02x}' for b in data)}")
     return lines
@@ -1053,8 +1053,8 @@ def _parse_power_phy_ack(reader):
         lines.append("    (insufficient data)")
         return lines
     reader.read_bits(4)
-    port_num = reader.read_bits(4)
-    lines.append(f"    Port_Number: {port_num}")
+    port_num, pn_spec = reader.read_bits(4)
+    lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
     return lines
 
 
@@ -1375,7 +1375,7 @@ def format_sequential_output(entries, messages, regs_db):
                 hdr = pkt["header"]
                 all_indices = msg.get("entry_indices", [])
                 is_last_entry_of_msg = (idx == all_indices[-1]) if all_indices else False
-                
+
                 # Show packet header for every entry
                 pkt_label = f"Packet {pkt_idx+1}/{msg['num_packets']}"
                 if msg["is_multi_packet"]:
@@ -1400,7 +1400,7 @@ def format_sequential_output(entries, messages, regs_db):
                     lines.append(f"    Body data: {data_hex}")
                 if pkt.get("crc8") is not None:
                     lines.append(f"    CRC-8: 0x{pkt['crc8']:02x}")
-                
+
                 # Show full message assembly + MT detail on LAST entry
                 if is_last_entry_of_msg:
                     lines.append(f"  ── MST Sideband Message ({msg['buffer']} 0x{msg['base_addr']:05x}) ──")

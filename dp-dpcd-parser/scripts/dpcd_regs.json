@@ -1,0 +1,4927 @@
+{
+  "0x00000": {
+    "name": "DPCD_REV",
+    "fields": [
+      {
+        "bits": "7:4",
+        "name": "major_revision",
+        "desc": "10h=r1.0, 11h=r1.1, 12h=r1.2, 13h=r1.3(eDP), 14h=r1.4",
+        "values": {
+          "1": "DP v1.x",
+          "2": "DP v2.x"
+        }
+      },
+      {
+        "bits": "3:0",
+        "name": "minor_revision",
+        "desc": "DPCD minor revision number",
+        "values": {
+          "0": ".0",
+          "1": ".1",
+          "2": ".2",
+          "3": ".3(eDP)",
+          "4": ".4"
+        }
+      }
+    ]
+  },
+  "0x00001": {
+    "name": "MAX_LINK_RATE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "MAX_LINK_RATE",
+        "desc": "Bandwidth = Value x 0.27Gbps/lane",
+        "values": {
+          "0x06": "RBR (1.62 Gbps/lane)",
+          "0x0a": "HBR (2.7 Gbps/lane)",
+          "0x14": "HBR2 (5.4 Gbps/lane)",
+          "0x1e": "HBR3 (8.1 Gbps/lane)"
+        }
+      }
+    ]
+  },
+  "0x00002": {
+    "name": "MAX_LANE_COUNT",
+    "fields": [
+      {
+        "bits": "7",
+        "name": "ENHANCED_FRAME_CAP",
+        "desc": "0=not supported, 1=supported (shall be 1 for r1.1+)",
+        "values": {
+          "0": "not supported",
+          "1": "supported"
+        }
+      },
+      {
+        "bits": "6",
+        "name": "TPS3_SUPPORTED",
+        "desc": "0=not supported, 1=supported (required for HBR2)",
+        "values": {
+          "0": "not supported",
+          "1": "supported"
+        }
+      },
+      {
+        "bits": "5",
+        "name": "POST_LT_ADJ_REQ_SUPPORTED",
+        "desc": "0=not supported, 1=supported",
+        "values": {
+          "0": "not supported",
+          "1": "supported"
+        }
+      },
+      {
+        "bits": "4:0",
+        "name": "MAX_LANE_COUNT",
+        "desc": "01h=1 lane, 02h=2 lanes, 04h=4 lanes",
+        "values": {
+          "1": "1 lane",
+          "2": "2 lanes",
+          "4": "4 lanes"
+        }
+      }
+    ]
+  },
+  "0x00003": {
+    "name": "MAX_DOWNSPREAD",
+    "fields": [
+      {
+        "bits": "7",
+        "name": "TPS4_SUPPORTED",
+        "desc": "0=not supported, 1=supported (required for HBR3)",
+        "values": {
+          "0": "not supported",
+          "1": "supported"
+        }
+      },
+      {
+        "bits": "6",
+        "name": "NO_AUX_TRANSACTION_LINK_TRAINING",
+        "desc": "0=AUX needed, 1=AUX not needed",
+        "values": {
+          "0": "AUX needed for LT",
+          "1": "AUX not needed"
+        }
+      },
+      {
+        "bits": "5:1",
+        "name": "RESERVED",
+        "desc": "Read all 0s"
+      },
+      {
+        "bits": "0",
+        "name": "MAX_DOWNSPREAD",
+        "desc": "0=No down spread, 1=Up to 0.5% down spread",
+        "values": {
+          "0": "No down spread",
+          "1": "0.5% down spread"
+        }
+      }
+    ]
+  },
+  "0x00004": {
+    "name": "NORP_AND_DP_PWR_VOLTAGE_CAP",
+    "fields": [
+      {
+        "bits": "7",
+        "name": "18V_DP_PWR_CAP",
+        "desc": "0=not capable, 1=capable",
+        "values": {
+          "0": "not capable",
+          "1": "capable"
+        }
+      },
+      {
+        "bits": "6",
+        "name": "12V_DP_PWR_CAP",
+        "desc": "0=not capable, 1=capable",
+        "values": {
+          "0": "not capable",
+          "1": "capable"
+        }
+      },
+      {
+        "bits": "5",
+        "name": "5V_DP_PWR_CAP",
+        "desc": "0=not capable, 1=capable",
+        "values": {
+          "0": "not capable",
+          "1": "capable"
+        }
+      },
+      {
+        "bits": "4:2",
+        "name": "RESERVED",
+        "desc": "Read all 0s"
+      },
+      {
+        "bits": "1",
+        "name": "CRC_3D_OPTIONS_SUPPORTED",
+        "desc": "0=not supported, 1=supported",
+        "values": {
+          "0": "not supported",
+          "1": "supported"
+        }
+      },
+      {
+        "bits": "0",
+        "name": "NORP",
+        "desc": "Number of Receiver Ports = Value+1",
+        "values": {
+          "0": "1 port",
+          "1": "2 ports"
+        }
+      }
+    ]
+  },
+  "0x00005": {
+    "name": "DOWN_STREAM_PORT_PRESENT",
+    "fields": [
+      {
+        "bits": "7:5",
+        "name": "RESERVED",
+        "desc": "Read all 0s"
+      },
+      {
+        "bits": "4",
+        "name": "DETAILED_CAP_INFO_AVAILABLE",
+        "desc": "0=1 byte/port at 0x00080, 1=4 bytes/port. Shall be 1 for r1.4",
+        "values": {
+          "0": "1 byte/port",
+          "1": "4 bytes/port"
+        }
+      },
+      {
+        "bits": "3",
+        "name": "FORMAT_CONVERSION",
+        "desc": "0=No format conversion, 1=Has format conversion block",
+        "values": {
+          "0": "No format conversion",
+          "1": "Has format conversion"
+        }
+      },
+      {
+        "bits": "2:1",
+        "name": "DFP_TYPE",
+        "desc": "00b=DP, 01b=VGA, 10b=DVI/HDMI/DP++, 11b=Others",
+        "values": {
+          "0": "DP",
+          "1": "VGA",
+          "2": "DVI/HDMI/DP++",
+          "3": "Others"
+        }
+      },
+      {
+        "bits": "0",
+        "name": "DFP_PRESENT",
+        "desc": "1=Branch device with DFP(s)",
+        "values": {
+          "0": "No DFP",
+          "1": "Branch device with DFP(s)"
+        }
+      }
+    ]
+  },
+  "0x00006": {
+    "name": "MAIN_LINK_CHANNEL_CODING",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "8b/10b",
+        "values": {
+          "0": "not supported",
+          "1": "supported"
+        }
+      },
+      {
+        "bits": "1",
+        "name": "RESERVED"
+      },
+      {
+        "bits": "2",
+        "name": "128b/132b",
+        "values": {
+          "0": "not supported",
+          "1": "supported"
+        }
+      },
+      {
+        "bits": "7:3",
+        "name": "RESERVED"
+      }
+    ]
+  },
+  "0x00007": {
+    "name": "DOWN_STREAM_PORT_COUNT",
+    "fields": [
+      {
+        "bits": "7",
+        "name": "OUI_Support",
+        "desc": "0=OUI not supported, 1=supported",
+        "values": {
+          "0": "not supported",
+          "1": "supported"
+        }
+      },
+      {
+        "bits": "6",
+        "name": "MSA_TIMING_PAR_IGNORED",
+        "desc": "0=Sink needs MSA, 1=Can render without MSA",
+        "values": {
+          "0": "needs MSA",
+          "1": "can ignore MSA"
+        }
+      },
+      {
+        "bits": "5:4",
+        "name": "RESERVED",
+        "desc": "Read all 0s"
+      },
+      {
+        "bits": "3:0",
+        "name": "DFP_COUNT",
+        "desc": "Number of DFPs"
+      }
+    ]
+  },
+  "0x00008": {
+    "name": "RECEIVE_PORT0_CAP_0",
+    "fields": [
+      {
+        "bits": "7:6",
+        "name": "RESERVED",
+        "desc": "Read all 0s"
+      },
+      {
+        "bits": "5",
+        "name": "BUFFER_SIZE_PER_PORT",
+        "desc": "0=per-lane, 1=per-port",
+        "values": {
+          "0": "per-lane",
+          "1": "per-port"
+        }
+      },
+      {
+        "bits": "4",
+        "name": "BUFFER_SIZE_UNIT",
+        "desc": "0=Pixel counts, 1=Byte counts",
+        "values": {
+          "0": "pixel counts",
+          "1": "byte counts"
+        }
+      },
+      {
+        "bits": "3",
+        "name": "HBLANK_EXPANSION_CAPABLE",
+        "desc": "0=not capable, 1=capable"
+      },
+      {
+        "bits": "2",
+        "name": "ASSOCIATED_TO_PRECEDING_PORT",
+        "desc": "0=Main stream port, 1=Secondary stream",
+        "values": {
+          "0": "main stream port",
+          "1": "secondary stream"
+        }
+      },
+      {
+        "bits": "1",
+        "name": "LOCAL_EDID_PRESENT",
+        "desc": "0=No local EDID, 1=Has local EDID",
+        "values": {
+          "0": "No local EDID",
+          "1": "Has local EDID"
+        }
+      },
+      {
+        "bits": "0",
+        "name": "RESERVED",
+        "desc": "Read all 0s"
+      }
+    ]
+  },
+  "0x00009": {
+    "name": "RECEIVE_PORT0_CAP_1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "BUFFER_SIZE",
+        "desc": "Buffer size = (Value+1) x 32"
+      }
+    ]
+  },
+  "0x0000a": {
+    "name": "RECEIVE_PORT1_CAP_0",
+    "fields": [
+      {
+        "bits": "7:6",
+        "name": "RESERVED",
+        "desc": "Read all 0s"
+      },
+      {
+        "bits": "5",
+        "name": "BUFFER_SIZE_PER_PORT",
+        "desc": "0=per-lane, 1=per-port",
+        "values": {
+          "0": "per-lane",
+          "1": "per-port"
+        }
+      },
+      {
+        "bits": "4",
+        "name": "BUFFER_SIZE_UNIT",
+        "desc": "0=Pixel counts, 1=Byte counts",
+        "values": {
+          "0": "pixel counts",
+          "1": "byte counts"
+        }
+      },
+      {
+        "bits": "3",
+        "name": "HBLANK_EXPANSION_CAPABLE",
+        "desc": ""
+      },
+      {
+        "bits": "2",
+        "name": "ASSOCIATED_TO_PRECEDING_PORT",
+        "desc": "0=Main stream port, 1=Secondary stream",
+        "values": {
+          "0": "main stream port",
+          "1": "secondary stream"
+        }
+      },
+      {
+        "bits": "1",
+        "name": "LOCAL_EDID_PRESENT",
+        "desc": "0=No local EDID, 1=Has local EDID",
+        "values": {
+          "0": "No local EDID",
+          "1": "Has local EDID"
+        }
+      },
+      {
+        "bits": "0",
+        "name": "RESERVED",
+        "desc": "Read all 0s"
+      }
+    ]
+  },
+  "0x0000b": {
+    "name": "RECEIVE_PORT1_CAP_1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "BUFFER_SIZE",
+        "desc": "Buffer size = (Value+1) x 32"
+      }
+    ]
+  },
+  "0x0000c": {
+    "name": "I2C Speed Control Capabilities",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "I2C Speed Bit Map",
+        "desc": "01h=1Kbps, 02h=5Kbps, 04h=10Kbps, 08h=100Kbps, 10h=400Kbps, 20h=1Mbps"
+      }
+    ]
+  },
+  "0x0000d": {
+    "name": "eDP_CONFIGURATION_CAP",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "ALPM_CAP"
+      },
+      {
+        "bits": "1",
+        "name": "SCRAMBLER_RESET_CAP"
+      },
+      {
+        "bits": "2",
+        "name": "FRAMING_CHANGE_CAP"
+      },
+      {
+        "bits": "3",
+        "name": "PANEL_SELF_REFRESH_CAP"
+      },
+      {
+        "bits": "4",
+        "name": "SINK_COUNT_ACTIVE_CAP"
+      },
+      {
+        "bits": "5",
+        "name": "SINK_AUDIO_DELAY_KEEP_ALIVE_CAP"
+      },
+      {
+        "bits": "6",
+        "name": "BACKLIGHT_ADJUSTMENT_CAP"
+      },
+      {
+        "bits": "7",
+        "name": "RESERVED"
+      }
+    ]
+  },
+  "0x0000e": {
+    "name": "ADAPTER_CAP",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "FORCE_LOAD_SENSE_CAP"
+      },
+      {
+        "bits": "1",
+        "name": "ALTERNATE_I2C_PATTERN_CAP"
+      },
+      {
+        "bits": "2",
+        "name": "AUX_LDPS_CAP"
+      },
+      {
+        "bits": "7:3",
+        "name": "RESERVED"
+      }
+    ]
+  },
+  "0x0000f": {
+    "name": "ADAPTER_CAP",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "FORCE_LOAD_SENSE_CAP"
+      },
+      {
+        "bits": "1",
+        "name": "ALTERNATE_I2C_PATTERN_CAP"
+      },
+      {
+        "bits": "7:2",
+        "name": "RESERVED"
+      }
+    ]
+  },
+  "0x00010": {
+    "name": "DP_CEC_MESSAGE_BUFFER_LENGTH",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00020": {
+    "name": "DP_FAUX_CAP",
+    "fields": [
+      {
+        "name": "DP_FAUX_CAP_1",
+        "bits": "0"
+      },
+      {
+        "name": "DP_FALLBACK_1024x768_60HZ_24BPP",
+        "bits": "0"
+      },
+      {
+        "name": "DP_FALLBACK_1280x720_60HZ_24BPP",
+        "bits": "1"
+      },
+      {
+        "name": "DP_FALLBACK_1920x1080_60HZ_24BPP",
+        "bits": "2"
+      }
+    ]
+  },
+  "0x00021": {
+    "name": "MSTM_CAP",
+    "fields": [
+      {
+        "bits": "7:2",
+        "name": "RESERVED",
+        "desc": "Read all 0s"
+      },
+      {
+        "bits": "1",
+        "name": "SINGLE_STREAM_SIDEBAND_MSG",
+        "desc": "DP 2.0 feature",
+        "values": {
+          "0": "not supported",
+          "1": "supported"
+        }
+      },
+      {
+        "bits": "0",
+        "name": "MST_CAP",
+        "desc": "0=MST not supported, 1=MST supported",
+        "values": {
+          "0": "not supported",
+          "1": "supported"
+        }
+      }
+    ]
+  },
+  "0x00022": {
+    "name": "NUMBER_OF_AUDIO_ENDPOINTS",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "Number of audio endpoints",
+        "desc": "0 for Branch devices"
+      }
+    ]
+  },
+  "0x00023": {
+    "name": "AV_GRANULARITY",
+    "fields": [
+      {
+        "bits": "3:0",
+        "name": "AG_FACTOR",
+        "desc": "0h=3ms, 1h=2ms, 2h=1ms, 3h=500us, 4h=200us, 5h=100us, 6h=10us, 7h=1us"
+      },
+      {
+        "bits": "7:4",
+        "name": "VG_FACTOR",
+        "desc": "Same scale as AG_FACTOR"
+      }
+    ]
+  },
+  "0x00024": {
+    "name": "DP_AUD_DEC_LAT0",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00025": {
+    "name": "DP_AUD_DEC_LAT1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00026": {
+    "name": "DP_AUD_PP_LAT0",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00027": {
+    "name": "DP_AUD_PP_LAT1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00028": {
+    "name": "DP_VID_INTER_LAT",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00029": {
+    "name": "DP_VID_PROG_LAT",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0002a": {
+    "name": "DP_REP_LAT",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0002b": {
+    "name": "DP_AUD_DEL_INS0",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0002c": {
+    "name": "DP_AUD_DEL_INS1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0002d": {
+    "name": "DP_AUD_DEL_INS2",
+    "fields": [
+      {
+        "name": "DP_ALPM_CAP",
+        "bits": "0"
+      },
+      {
+        "name": "DP_AUX_FRAME_SYNC_CAP",
+        "bits": "0"
+      },
+      {
+        "name": "DP_DSC_DECOMPRESSION_IS_SUPPORTED",
+        "bits": "0"
+      },
+      {
+        "name": "DP_DSC_PASSTHROUGH_IS_SUPPORTED",
+        "bits": "1"
+      },
+      {
+        "name": "DP_DSC_DYNAMIC_PPS_UPDATE_SUPPORT_COMP_TO_COMP",
+        "bits": "2"
+      },
+      {
+        "name": "DP_DSC_DYNAMIC_PPS_UPDATE_SUPPORT_UNCOMP_TO_COMP",
+        "bits": "3"
+      }
+    ]
+  },
+  "0x0002e": {
+    "name": "ADDITIONAL_SINK_COUNT_FIELD",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "ADDITIONAL_SINK_COUNT"
+      }
+    ]
+  },
+  "0x0002f": {
+    "name": "DP_SINK_DEVICE_AUX_FRAME_SYNC_CAP",
+    "fields": [
+      {
+        "name": "DP_AUX_FRAME_SYNC_CAP",
+        "bits": "0"
+      }
+    ]
+  },
+  "0x00030": {
+    "name": "GUID",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "GUID",
+        "desc": "RFC 4122 GUID (16 bytes, Network Byte Order)"
+      }
+    ]
+  },
+  "0x00058": {
+    "name": "RX_GTC_PRIMARY_REQ",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "RX_GTC_PRIMARY_REQ",
+        "desc": "0=Not requesting, 1=Requesting GTC Primary",
+        "values": {
+          "0": "Not requesting"
+        }
+      },
+      {
+        "bits": "1",
+        "name": "TX_GTC_VALUE_PHASE_SKEW_EN"
+      }
+    ]
+  },
+  "0x00059": {
+    "name": "RX_GTC_FREQ_LOCK_DONE",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "RX_GTC_FREQ_LOCK_DONE",
+        "desc": "0=Not achieved, 1=Achieved",
+        "values": {
+          "0": "Not achieved"
+        }
+      }
+    ]
+  },
+  "0x00060": {
+    "name": "DSC_SUPPORT",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "DSC Support",
+        "desc": "0=not supported, 1=supported",
+        "values": {
+          "0": "not supported"
+        }
+      }
+    ]
+  },
+  "0x00061": {
+    "name": "DSC_ALGORITHM_REVISION",
+    "fields": [
+      {
+        "bits": "3:0",
+        "name": "DSC Version Major",
+        "desc": "1h for DSC v1.2/v1.2a"
+      },
+      {
+        "bits": "7:4",
+        "name": "DSC Version Minor",
+        "desc": "2h for DSC v1.2/v1.2a"
+      }
+    ]
+  },
+  "0x00062": {
+    "name": "DSC_RC_BUFFER_BLOCK_SIZE",
+    "fields": [
+      {
+        "bits": "1:0",
+        "name": "RC Buffer Block Size",
+        "desc": "00b=1KB, 01b=4KB, 10b=16KB, 11b=64KB",
+        "values": {
+          "11": "1KB",
+          "267": "16KB"
+        }
+      }
+    ]
+  },
+  "0x00063": {
+    "name": "DSC_RC_BUFFER_SIZE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "Each Rate Buffer Size",
+        "desc": "Size = value+1 (in blocks)"
+      }
+    ]
+  },
+  "0x00064": {
+    "name": "DSC_SLICE_CAPABILITIES_1",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "1_SLICE",
+        "desc": "1 slice supported"
+      },
+      {
+        "bits": "1",
+        "name": "2_SLICES",
+        "desc": "2 slices supported"
+      },
+      {
+        "bits": "2",
+        "name": "RESERVED",
+        "desc": ""
+      },
+      {
+        "bits": "3",
+        "name": "4_SLICES",
+        "desc": "4 slices supported"
+      },
+      {
+        "bits": "4",
+        "name": "6_SLICES",
+        "desc": "6 slices supported"
+      },
+      {
+        "bits": "5",
+        "name": "8_SLICES",
+        "desc": "8 slices supported"
+      },
+      {
+        "bits": "6",
+        "name": "10_SLICES",
+        "desc": "10 slices supported"
+      },
+      {
+        "bits": "7",
+        "name": "12_SLICES",
+        "desc": "12 slices supported"
+      }
+    ]
+  },
+  "0x00065": {
+    "name": "DSC_LINE_BUFFER_BIT_DEPTH",
+    "fields": [
+      {
+        "bits": "3:0",
+        "name": "Line Buffer Bit Depth",
+        "desc": "0h=9b, 1h=10b, 2h=11b, 3h=12b, 4h=13b, 5h=14b, 6h=15b, 7h=16b, 8h=8b"
+      }
+    ]
+  },
+  "0x00066": {
+    "name": "DSC_BLOCK_PREDICTION_SUPPORT",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "Block Prediction Support",
+        "desc": "0=Not supported, 1=Supported",
+        "values": {
+          "0": "Not supported"
+        }
+      }
+    ]
+  },
+  "0x00067": {
+    "name": "MAX_BITS_PER_PIXEL_SUPPORTED",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "BITS_PER_PIXEL",
+        "desc": "U6.4 format (10 bits total)"
+      }
+    ]
+  },
+  "0x00068": {
+    "name": "MAX_BITS_PER_PIXEL_SUPPORTED_MSB",
+    "fields": [
+      {
+        "bits": "1:0",
+        "name": "BITS_PER_PIXEL_MSB",
+        "desc": "Upper 2 bits of 10-bit bpp value"
+      }
+    ]
+  },
+  "0x00069": {
+    "name": "DSC_DECODER_COLOR_FORMAT_CAPABILITIES",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "RGB Support",
+        "desc": "Shall be 1"
+      },
+      {
+        "bits": "1",
+        "name": "YCbCr 4:4:4 Support"
+      },
+      {
+        "bits": "2",
+        "name": "YCbCr Simple 4:2:2 Support"
+      },
+      {
+        "bits": "3",
+        "name": "YCbCr Native 4:2:2 Support"
+      },
+      {
+        "bits": "4",
+        "name": "YCbCr Native 4:2:0 Support"
+      }
+    ]
+  },
+  "0x0006a": {
+    "name": "DSC_DECODER_COLOR_DEPTH_CAPABILITIES",
+    "fields": [
+      {
+        "bits": "1",
+        "name": "8 bpc Support",
+        "desc": "Shall be 1"
+      },
+      {
+        "bits": "2",
+        "name": "10 bpc Support"
+      },
+      {
+        "bits": "3",
+        "name": "12 bpc Support"
+      }
+    ]
+  },
+  "0x0006b": {
+    "name": "DSC_PEAK_THROUGHPUT",
+    "fields": [
+      {
+        "bits": "3:0",
+        "name": "Throughput Mode 0",
+        "desc": "MP/s for 4:4:4/Simple 4:2:2"
+      },
+      {
+        "bits": "7:4",
+        "name": "Throughput Mode 1",
+        "desc": "MP/s for Native 4:2:2/4:2:0"
+      }
+    ]
+  },
+  "0x0006c": {
+    "name": "DSC_MAXIMUM_SLICE_WIDTH",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "Max Slice Width",
+        "desc": "= Value \u00d7 320 pixels. Min=8 (2560 pixels)"
+      }
+    ]
+  },
+  "0x0006d": {
+    "name": "DSC_SLICE_CAPABILITIES_2",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "16 Slices"
+      },
+      {
+        "bits": "1",
+        "name": "20 Slices"
+      },
+      {
+        "bits": "2",
+        "name": "24 Slices"
+      }
+    ]
+  },
+  "0x0006f": {
+    "name": "BITS_PER_PIXEL_INCREMENT",
+    "fields": [
+      {
+        "bits": "2:0",
+        "name": "INCREMENT of bpp SUPPORTED",
+        "desc": "000b=1/16, 001b=1/8, 010b=1/4, 011b=1/2, 100b=1",
+        "values": {
+          "11": "1/16",
+          "267": "1/4",
+          "4107": "1"
+        }
+      }
+    ]
+  },
+  "0x00080": {
+    "name": "DETAILED_CAP_INFO_AVAILABLE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "PORT_CAPABILITY",
+        "desc": "1 or 4 bytes/port depending on DETAILED_CAP_INFO_AVAILABLE bit"
+      }
+    ]
+  },
+  "0x00090": {
+    "name": "FEC_CAPABILITY",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "FEC_CAPABLE"
+      },
+      {
+        "bits": "1",
+        "name": "UNCORRECTED_BLOCK_ERROR_COUNT_CAPABLE"
+      },
+      {
+        "bits": "2",
+        "name": "CORRECTED_BLOCK_ERROR_COUNT_CAPABLE"
+      },
+      {
+        "bits": "3",
+        "name": "BIT_ERROR_COUNT_CAPABLE"
+      },
+      {
+        "bits": "7",
+        "name": "FEC_ERROR_REPORTING_POLICY_SUPPORTED"
+      }
+    ]
+  },
+  "0x00091": {
+    "name": "DP_FEC_CAPABILITY_1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00092": {
+    "name": "DP_PCON_DSC_ENCODER",
+    "fields": [
+      {
+        "name": "DP_PCON_DSC_ENCODER_SUPPORTED",
+        "bits": "0"
+      },
+      {
+        "name": "DP_PCON_DSC_PPS_ENC_OVERRIDE",
+        "bits": "1"
+      }
+    ]
+  },
+  "0x00093": {
+    "name": "DP_PCON_DSC_VERSION",
+    "fields": [
+      {
+        "name": "DP_PCON_DSC_MAJOR_MASK",
+        "bits": "3:0"
+      },
+      {
+        "name": "DP_PCON_DSC_MINOR_MASK",
+        "bits": "7:4"
+      }
+    ]
+  },
+  "0x00094": {
+    "name": "DP_PCON_DSC_RC_BUF_BLK_INFO",
+    "fields": [
+      {
+        "name": "DP_PCON_DSC_RC_BUF_BLK_SIZE",
+        "bits": "1:0"
+      }
+    ]
+  },
+  "0x00095": {
+    "name": "DP_PCON_DSC_RC_BUF_SIZE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00096": {
+    "name": "DP_PCON_DSC_SLICE_CAP_1",
+    "fields": [
+      {
+        "name": "DP_PCON_DSC_1_PER_DSC_ENC",
+        "bits": "0:0"
+      },
+      {
+        "name": "DP_PCON_DSC_2_PER_DSC_ENC",
+        "bits": "1:1"
+      },
+      {
+        "name": "DP_PCON_DSC_4_PER_DSC_ENC",
+        "bits": "3:3"
+      },
+      {
+        "name": "DP_PCON_DSC_6_PER_DSC_ENC",
+        "bits": "4:4"
+      },
+      {
+        "name": "DP_PCON_DSC_8_PER_DSC_ENC",
+        "bits": "5:5"
+      },
+      {
+        "name": "DP_PCON_DSC_10_PER_DSC_ENC",
+        "bits": "6:6"
+      },
+      {
+        "name": "DP_PCON_DSC_12_PER_DSC_ENC",
+        "bits": "7:7"
+      }
+    ]
+  },
+  "0x00097": {
+    "name": "DP_PCON_DSC_BUF_BIT_DEPTH",
+    "fields": [
+      {
+        "name": "DP_PCON_DSC_BIT_DEPTH_MASK",
+        "bits": "3:0"
+      }
+    ]
+  },
+  "0x00098": {
+    "name": "DP_PCON_DSC_BLOCK_PREDICTION",
+    "fields": [
+      {
+        "name": "DP_PCON_DSC_BLOCK_PRED_SUPPORT",
+        "bits": "0:0"
+      }
+    ]
+  },
+  "0x00099": {
+    "name": "DP_PCON_DSC_ENC_COLOR_FMT_CAP",
+    "fields": [
+      {
+        "name": "DP_PCON_DSC_ENC_RGB",
+        "bits": "0:0"
+      },
+      {
+        "name": "DP_PCON_DSC_ENC_YUV444",
+        "bits": "1:1"
+      },
+      {
+        "name": "DP_PCON_DSC_ENC_YUV422_S",
+        "bits": "2:2"
+      },
+      {
+        "name": "DP_PCON_DSC_ENC_YUV422_N",
+        "bits": "3:3"
+      },
+      {
+        "name": "DP_PCON_DSC_ENC_YUV420_N",
+        "bits": "4:4"
+      }
+    ]
+  },
+  "0x0009a": {
+    "name": "DP_PCON_DSC_ENC_COLOR_DEPTH_CAP",
+    "fields": [
+      {
+        "name": "DP_PCON_DSC_ENC_8BPC",
+        "bits": "1:1"
+      },
+      {
+        "name": "DP_PCON_DSC_ENC_10BPC",
+        "bits": "2:2"
+      },
+      {
+        "name": "DP_PCON_DSC_ENC_12BPC",
+        "bits": "3:3"
+      }
+    ]
+  },
+  "0x0009b": {
+    "name": "DP_PCON_DSC_MAX_SLICE_WIDTH",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0009c": {
+    "name": "DP_PCON_DSC_SLICE_CAP_2",
+    "fields": [
+      {
+        "name": "DP_PCON_DSC_16_PER_DSC_ENC",
+        "bits": "0:0"
+      },
+      {
+        "name": "DP_PCON_DSC_20_PER_DSC_ENC",
+        "bits": "1:1"
+      },
+      {
+        "name": "DP_PCON_DSC_24_PER_DSC_ENC",
+        "bits": "2:2"
+      }
+    ]
+  },
+  "0x0009e": {
+    "name": "DP_PCON_DSC_BPP_INCR",
+    "fields": [
+      {
+        "name": "DP_PCON_DSC_BPP_INCR_MASK",
+        "bits": "2:0"
+      }
+    ]
+  },
+  "0x000a0": {
+    "name": "DP_DSC_BRANCH_OVERALL_THROUGHPUT_0",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x000a1": {
+    "name": "DP_DSC_BRANCH_OVERALL_THROUGHPUT_1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x000a2": {
+    "name": "DP_DSC_BRANCH_MAX_LINE_WIDTH",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x000a3": {
+    "name": "DP_DFP_CAPABILITY_EXTENSION_SUPPORT",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00100": {
+    "name": "LINK_BW_SET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "LINK_BW_SET",
+        "desc": "Bandwidth = Value x 0.27Gbps/lane",
+        "values": {
+          "0x06": "RBR",
+          "0x0a": "HBR",
+          "0x14": "HBR2",
+          "0x1e": "HBR3"
+        }
+      }
+    ]
+  },
+  "0x00101": {
+    "name": "LANE_COUNT_SET",
+    "fields": [
+      {
+        "bits": "7",
+        "name": "ENHANCED_FRAME_EN",
+        "desc": "1=Enhanced Framing enabled",
+        "values": {
+          "0": "disabled",
+          "1": "enabled"
+        }
+      },
+      {
+        "bits": "5",
+        "name": "POST_LT_ADJ_REQ_GRANTED",
+        "desc": "1=grant POST_LT_ADJ_REQ",
+        "values": {
+          "0": "not granted",
+          "1": "granted"
+        }
+      },
+      {
+        "bits": "4:0",
+        "name": "LANE_COUNT_SET",
+        "desc": "01h=1 lane, 02h=2 lanes, 04h=4 lanes",
+        "values": {
+          "1": "1 lane",
+          "2": "2 lanes",
+          "4": "4 lanes"
+        }
+      }
+    ]
+  },
+  "0x00102": {
+    "name": "TRAINING_PATTERN_SET",
+    "fields": [
+      {
+        "bits": "7:6",
+        "name": "SYMBOL_ERROR_COUNT_SEL",
+        "desc": "00b=Disparity+Illegal, 01b=Disparity, 10b=Illegal, 11b=RESERVED"
+      },
+      {
+        "bits": "5",
+        "name": "SCRAMBLING_DISABLE",
+        "desc": "0=scrambler on, 1=scrambler off",
+        "values": {
+          "0": "scrambler on",
+          "1": "scrambler off"
+        }
+      },
+      {
+        "bits": "4",
+        "name": "RECOVERED_CLOCK_OUT_EN",
+        "desc": "r1.4"
+      },
+      {
+        "bits": "3:0",
+        "name": "TRAINING_PATTERN_SELECT",
+        "desc": "r1.4: 0h=not in progress, 1h=TPS1, 2h=TPS2, 3h=TPS3, 7h=TPS4",
+        "values": {
+          "0": "not in progress",
+          "1": "TPS1",
+          "2": "TPS2",
+          "3": "TPS3",
+          "7": "TPS4"
+        }
+      }
+    ]
+  },
+  "0x00103": {
+    "name": "TRAINING_LANE0_SET",
+    "fields": [
+      {
+        "bits": "5",
+        "name": "MAX_PRE_EMPHASIS_REACHED",
+        "desc": ""
+      },
+      {
+        "bits": "4:3",
+        "name": "PRE_EMPHASIS_SET",
+        "desc": "00b=L0, 01b=L1, 10b=L2, 11b=L3"
+      },
+      {
+        "bits": "2",
+        "name": "MAX_SWING_REACHED",
+        "desc": ""
+      },
+      {
+        "bits": "1:0",
+        "name": "VOLTAGE_SWING_SET",
+        "desc": "00b=L0, 01b=L1, 10b=L2, 11b=L3"
+      }
+    ]
+  },
+  "0x00104": {
+    "name": "TRAINING_LANE1_SET",
+    "fields": [
+      {
+        "bits": "5",
+        "name": "MAX_PRE_EMPHASIS_REACHED",
+        "desc": ""
+      },
+      {
+        "bits": "4:3",
+        "name": "PRE_EMPHASIS_SET",
+        "desc": "00b=L0, 01b=L1, 10b=L2, 11b=L3"
+      },
+      {
+        "bits": "2",
+        "name": "MAX_SWING_REACHED",
+        "desc": ""
+      },
+      {
+        "bits": "1:0",
+        "name": "VOLTAGE_SWING_SET",
+        "desc": "00b=L0, 01b=L1, 10b=L2, 11b=L3"
+      }
+    ]
+  },
+  "0x00105": {
+    "name": "TRAINING_LANE2_SET",
+    "fields": [
+      {
+        "bits": "5",
+        "name": "MAX_PRE_EMPHASIS_REACHED",
+        "desc": ""
+      },
+      {
+        "bits": "4:3",
+        "name": "PRE_EMPHASIS_SET",
+        "desc": "00b=L0, 01b=L1, 10b=L2, 11b=L3"
+      },
+      {
+        "bits": "2",
+        "name": "MAX_SWING_REACHED",
+        "desc": ""
+      },
+      {
+        "bits": "1:0",
+        "name": "VOLTAGE_SWING_SET",
+        "desc": "00b=L0, 01b=L1, 10b=L2, 11b=L3"
+      }
+    ]
+  },
+  "0x00106": {
+    "name": "TRAINING_LANE3_SET",
+    "fields": [
+      {
+        "bits": "5",
+        "name": "MAX_PRE_EMPHASIS_REACHED",
+        "desc": ""
+      },
+      {
+        "bits": "4:3",
+        "name": "PRE_EMPHASIS_SET",
+        "desc": "00b=L0, 01b=L1, 10b=L2, 11b=L3"
+      },
+      {
+        "bits": "2",
+        "name": "MAX_SWING_REACHED",
+        "desc": ""
+      },
+      {
+        "bits": "1:0",
+        "name": "VOLTAGE_SWING_SET",
+        "desc": "00b=L0, 01b=L1, 10b=L2, 11b=L3"
+      }
+    ]
+  },
+  "0x00107": {
+    "name": "DOWNSPREAD_CTRL",
+    "fields": [
+      {
+        "bits": "7",
+        "name": "MSA_TIMING_PAR_IGNORE_EN",
+        "desc": ""
+      },
+      {
+        "bits": "4",
+        "name": "SPREAD_AMP",
+        "desc": "0=not down spread, 1=down spread <=0.5%",
+        "values": {
+          "0": "not down spread",
+          "1": "down spread <=0.5%"
+        }
+      }
+    ]
+  },
+  "0x00108": {
+    "name": "MAIN_LINK_CHANNEL_CODING_SET",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "SET_8b/10b"
+      },
+      {
+        "bits": "1",
+        "name": "RESERVED"
+      },
+      {
+        "bits": "2",
+        "name": "SET_128b/132b"
+      },
+      {
+        "bits": "7:3",
+        "name": "RESERVED"
+      }
+    ]
+  },
+  "0x00109": {
+    "name": "I2C_SPEED_CONTROL_STATUS",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "I2C Speed Bit Map",
+        "desc": "01h=1Kbps, 02h=5Kbps, 04h=10Kbps, 08h=100Kbps, 10h=400Kbps, 20h=1Mbps"
+      }
+    ]
+  },
+  "0x0010a": {
+    "name": "DP_EDP_CONFIGURATION_SET",
+    "fields": [
+      {
+        "name": "DP_ALTERNATE_SCRAMBLER_RESET_ENABLE",
+        "bits": "0"
+      },
+      {
+        "name": "DP_FRAMING_CHANGE_ENABLE",
+        "bits": "1"
+      },
+      {
+        "name": "DP_PANEL_SELF_TEST_ENABLE",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x0010b": {
+    "name": "LINK_QUAL_LANE0_SET",
+    "fields": [
+      {
+        "bits": "2:0",
+        "name": "LINK_QUAL_PATTERN_SET",
+        "desc": "000b=not transmitted, 001b=D10.2, 010b=SER, 011b=PRBS7, 100b=80-bit custom, 101b=CP2520-1, 110b=CP2520-2, 111b=CP2520-3",
+        "values": {
+          "11": "not transmitted",
+          "267": "SER",
+          "4107": "80-bit custom",
+          "4363": "CP2520-2"
+        }
+      }
+    ]
+  },
+  "0x0010c": {
+    "name": "LINK_QUAL_LANE1_SET",
+    "fields": [
+      {
+        "bits": "2:0",
+        "name": "LINK_QUAL_PATTERN_SET",
+        "desc": "000b=not transmitted, 001b=D10.2, 010b=SER, 011b=PRBS7, 100b=80-bit custom"
+      }
+    ]
+  },
+  "0x0010d": {
+    "name": "LINK_QUAL_LANE2_SET",
+    "fields": [
+      {
+        "bits": "2:0",
+        "name": "LINK_QUAL_PATTERN_SET",
+        "desc": "Same as 0010Bh"
+      }
+    ]
+  },
+  "0x0010e": {
+    "name": "LINK_QUAL_LANE3_SET",
+    "fields": [
+      {
+        "bits": "2:0",
+        "name": "LINK_QUAL_PATTERN_SET",
+        "desc": "Same as 0010Bh"
+      }
+    ]
+  },
+  "0x0010f": {
+    "name": "DP_TRAINING_LANE0_1_SET2",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00110": {
+    "name": "TRAINING_LANE2_3_SET2",
+    "fields": [
+      {
+        "bits": "1:0",
+        "name": "LANE2_POST_CURSOR2_SET"
+      },
+      {
+        "bits": "2",
+        "name": "LANE2_MAX_POST_CURSOR2_REACHED"
+      },
+      {
+        "bits": "5:4",
+        "name": "LANE3_POST_CURSOR2_SET"
+      },
+      {
+        "bits": "6",
+        "name": "LANE3_MAX_POST_CURSOR2_REACHED"
+      },
+      {
+        "bits": "7",
+        "name": "RESERVED"
+      }
+    ]
+  },
+  "0x00111": {
+    "name": "MSTM_CTRL",
+    "fields": [
+      {
+        "bits": "2",
+        "name": "UPSTREAM_IS_SRC",
+        "desc": "0=upstream is pre-DP1.2, 1=DP Source device",
+        "values": {
+          "0": "upstream not source",
+          "1": "upstream is DP Source"
+        }
+      },
+      {
+        "bits": "1",
+        "name": "UP_REQ_EN",
+        "desc": "0=prohibit UP_REQ, 1=allow UP_REQ",
+        "values": {
+          "0": "prohibit",
+          "1": "allow"
+        }
+      },
+      {
+        "bits": "0",
+        "name": "MST_EN",
+        "desc": "0=SST mode, 1=MST mode",
+        "values": {
+          "0": "SST mode",
+          "1": "MST mode"
+        }
+      }
+    ]
+  },
+  "0x00112": {
+    "name": "AUDIO_DELAY",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "AUDIO_DELAY",
+        "desc": "Audio delay in 1us granularity (3 bytes)"
+      }
+    ]
+  },
+  "0x00113": {
+    "name": "DP_AUDIO_DELAY1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00114": {
+    "name": "PHY_REPEATER_MODE",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "PHY_REPEATER_MODE_SET"
+      },
+      {
+        "bits": "7:1",
+        "name": "RESERVED"
+      }
+    ]
+  },
+  "0x00115": {
+    "name": "DP_LINK_RATE_SET",
+    "fields": [
+      {
+        "bits": "2:0",
+        "name": "DP_LINK_RATE_SET_MASK",
+        "values": {
+          "0": "use MAX_LINK_RATE",
+          "1": "HBR2 (5.4 Gbps)",
+          "2": "HBR3 (8.1 Gbps)",
+          "3": "UHBR10 (10 Gbps)",
+          "4": "UHBR13.5 (13.5 Gbps)",
+          "5": "UHBR20 (20 Gbps)"
+        }
+      },
+      {
+        "bits": "7:3",
+        "name": "RESERVED"
+      }
+    ]
+  },
+  "0x00116": {
+    "name": "DP_RECEIVER_ALPM_CONFIG",
+    "fields": [
+      {
+        "name": "DP_ALPM_ENABLE",
+        "bits": "0"
+      },
+      {
+        "name": "DP_ALPM_LOCK_ERROR_IRQ_HPD_ENABLE",
+        "bits": "1"
+      }
+    ]
+  },
+  "0x00117": {
+    "name": "DP_SINK_DEVICE_AUX_FRAME_SYNC_CONF",
+    "fields": [
+      {
+        "name": "DP_AUX_FRAME_SYNC_ENABLE",
+        "bits": "0"
+      },
+      {
+        "name": "DP_IRQ_HPD_ENABLE",
+        "bits": "1"
+      }
+    ]
+  },
+  "0x00118": {
+    "name": "UPSTREAM_DEVICE_DP_PWR_NEED",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "DP_PWR_NOT_NEEDED",
+        "desc": "0=needs DP_PWR, 1=does not need DP_PWR",
+        "values": {
+          "0": "needs DP_PWR"
+        }
+      }
+    ]
+  },
+  "0x00120": {
+    "name": "FEC_CONFIGURATION",
+    "fields": [
+      {
+        "bits": "5:4",
+        "name": "LANE_DEC_SELECT",
+        "desc": "00b=Lane0, 01b=Lane1, 10b=Lane2, 11b=Lane3"
+      },
+      {
+        "bits": "3:1",
+        "name": "FEC_ERROR_COUNT_SEL",
+        "desc": "000b=disabled, 001b=uncorrected, 010b=corrected, 011b=bit, 100b=parity block, 101b=parity bit"
+      },
+      {
+        "bits": "0",
+        "name": "FEC_READY",
+        "desc": "0=Not ready, 1=Ready",
+        "values": {
+          "0": "not ready",
+          "1": "ready"
+        }
+      }
+    ]
+  },
+  "0x0015c": {
+    "name": "DP_AUX_FRAME_SYNC_VALUE",
+    "fields": [
+      {
+        "name": "DP_AUX_FRAME_SYNC_VALID",
+        "bits": "0"
+      }
+    ]
+  },
+  "0x00160": {
+    "name": "DSC_ENABLE",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "DECOMPRESSION_EN",
+        "desc": "0=not enabled, 1=enabled",
+        "values": {
+          "0": "not enabled"
+        }
+      }
+    ]
+  },
+  "0x00161": {
+    "name": "DP_DSC_CONFIGURATION",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00170": {
+    "name": "DP_PSR_EN_CFG",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x001a0": {
+    "name": "ADAPTER_CTRL",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "FORCE_LOAD_SENSE",
+        "desc": "Prompts DP-to-Legacy Converter to sense legacy Sink"
+      }
+    ]
+  },
+  "0x001a1": {
+    "name": "BRANCH_DEVICE_CTRL",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "HP Event Notification Type",
+        "desc": "0=HPD long pulse, 1=IRQ_HPD",
+        "values": {
+          "0": "HPD long pulse"
+        }
+      }
+    ]
+  },
+  "0x001c0": {
+    "name": "PAYLOAD_ALLOCATE_SET",
+    "fields": [
+      {
+        "bits": "6:0",
+        "name": "VC_Payload_ID",
+        "desc": "ID=0 means unallocated"
+      }
+    ]
+  },
+  "0x001c1": {
+    "name": "PAYLOAD_ALLOCATE_START_TIME_SLOT",
+    "fields": [
+      {
+        "bits": "5:0",
+        "name": "Starting Time Slot of VC Payload ID"
+      }
+    ]
+  },
+  "0x001c2": {
+    "name": "PAYLOAD_ALLOCATE_TIME_SLOT_COUNT",
+    "fields": [
+      {
+        "bits": "5:0",
+        "name": "Time Slot Count of VC Payload ID"
+      },
+      {
+        "bits": "6",
+        "name": "CP_READY",
+        "desc": "1=all Sink devices are CP-capable",
+        "values": {
+          "1": "all Sink devices are CP-capable"
+        }
+      },
+      {
+        "bits": "1",
+        "name": "AUTOMATED_TEST_REQUEST",
+        "desc": "1=read DPCD 00218h-002BFh",
+        "values": {
+          "1": "read DPCD 00218h-002BFh"
+        }
+      },
+      {
+        "bits": "2",
+        "name": "CP_IRQ"
+      },
+      {
+        "bits": "3",
+        "name": "MCCS_IRQ"
+      },
+      {
+        "bits": "6",
+        "name": "SINK_SPECIFIC_IRQ"
+      },
+      {
+        "bits": "1",
+        "name": "LANE0_CHANNEL_EQ_DONE",
+        "desc": "Lane 0 channel equalization done"
+      },
+      {
+        "bits": "2",
+        "name": "LANE0_SYMBOL_LOCKED",
+        "desc": "Lane 0 symbol locked"
+      },
+      {
+        "bits": "4",
+        "name": "LANE1_CR_DONE",
+        "desc": "Lane 1 clock recovery done"
+      },
+      {
+        "bits": "5",
+        "name": "LANE1_CHANNEL_EQ_DONE",
+        "desc": "Lane 1 channel equalization done"
+      },
+      {
+        "bits": "6",
+        "name": "LANE1_SYMBOL_LOCKED",
+        "desc": "Lane 1 symbol locked"
+      },
+      {
+        "bits": "1",
+        "name": "POST_LT_ADJ_REQ_IN_PROGRESS"
+      },
+      {
+        "bits": "6",
+        "name": "DOWNSTREAM_PORT_STATUS_CHANGED",
+        "desc": "Branch device DFP connection status changed"
+      },
+      {
+        "bits": "7",
+        "name": "LINK_STATUS_UPDATED",
+        "desc": "Link status updated since last read"
+      },
+      {
+        "bits": "1",
+        "name": "RECEIVE_PORT_1_STATUS",
+        "desc": "0=out of sync, 1=in sync",
+        "values": {
+          "0": "out of sync"
+        }
+      }
+    ]
+  },
+  "0x00200": {
+    "name": "SINK_COUNT",
+    "fields": [
+      {
+        "bits": "6",
+        "name": "CP_READY",
+        "desc": "1=all Sink devices are CP-capable",
+        "values": {
+          "0": "not ready",
+          "1": "CP ready"
+        }
+      },
+      {
+        "bits": "7,5:0",
+        "name": "SINK_COUNT",
+        "desc": "Total number of stream sinks"
+      }
+    ]
+  },
+  "0x00201": {
+    "name": "DEVICE_SERVICE_IRQ_VECTOR",
+    "fields": [
+      {
+        "bits": "6",
+        "name": "SINK_SPECIFIC_IRQ",
+        "desc": "Sink specific interrupt"
+      },
+      {
+        "bits": "5",
+        "name": "UP_REQ_MSG_RDY",
+        "desc": "1=read UP_REQ_MSG",
+        "values": {
+          "0": "no message",
+          "1": "read UP_REQ_MSG"
+        }
+      },
+      {
+        "bits": "4",
+        "name": "DOWN_REP_MSG_RDY",
+        "desc": "1=read DOWN_REP_MSG",
+        "values": {
+          "0": "no message",
+          "1": "read DOWN_REP_MSG"
+        }
+      },
+      {
+        "bits": "3",
+        "name": "MCCS_IRQ",
+        "desc": "MCCS interrupt"
+      },
+      {
+        "bits": "2",
+        "name": "CP_IRQ",
+        "desc": "Content protection interrupt"
+      },
+      {
+        "bits": "1",
+        "name": "AUTOMATED_TEST_REQUEST",
+        "desc": "1=read DPCD 00218h-002BFh"
+      },
+      {
+        "bits": "0",
+        "name": "REMOTE_CONTROL_COMMAND_PENDING",
+        "desc": "Remote control command pending"
+      }
+    ]
+  },
+  "0x00202": {
+    "name": "LANE0_1_STATUS",
+    "fields": [
+      {
+        "bits": "6",
+        "name": "LANE1_SYMBOL_LOCKED",
+        "desc": "Lane 1 symbol locked"
+      },
+      {
+        "bits": "5",
+        "name": "LANE1_CHANNEL_EQ_DONE",
+        "desc": "Lane 1 channel equalization done"
+      },
+      {
+        "bits": "4",
+        "name": "LANE1_CR_DONE",
+        "desc": "Lane 1 clock recovery done"
+      },
+      {
+        "bits": "2",
+        "name": "LANE0_SYMBOL_LOCKED",
+        "desc": "Lane 0 symbol locked"
+      },
+      {
+        "bits": "1",
+        "name": "LANE0_CHANNEL_EQ_DONE",
+        "desc": "Lane 0 channel equalization done"
+      },
+      {
+        "bits": "0",
+        "name": "LANE0_CR_DONE",
+        "desc": "Lane 0 clock recovery done"
+      }
+    ]
+  },
+  "0x00203": {
+    "name": "LANE2_3_STATUS",
+    "fields": [
+      {
+        "bits": "6",
+        "name": "LANE3_SYMBOL_LOCKED",
+        "desc": "Lane 3 symbol locked"
+      },
+      {
+        "bits": "5",
+        "name": "LANE3_CHANNEL_EQ_DONE",
+        "desc": "Lane 3 channel equalization done"
+      },
+      {
+        "bits": "4",
+        "name": "LANE3_CR_DONE",
+        "desc": "Lane 3 clock recovery done"
+      },
+      {
+        "bits": "2",
+        "name": "LANE2_SYMBOL_LOCKED",
+        "desc": "Lane 2 symbol locked"
+      },
+      {
+        "bits": "1",
+        "name": "LANE2_CHANNEL_EQ_DONE",
+        "desc": "Lane 2 channel equalization done"
+      },
+      {
+        "bits": "0",
+        "name": "LANE2_CR_DONE",
+        "desc": "Lane 2 clock recovery done"
+      }
+    ]
+  },
+  "0x00204": {
+    "name": "LANE_ALIGN_STATUS_UPDATED",
+    "fields": [
+      {
+        "bits": "7",
+        "name": "LINK_STATUS_UPDATED",
+        "desc": "Link status updated since last read"
+      },
+      {
+        "bits": "6",
+        "name": "DOWNSTREAM_PORT_STATUS_CHANGED",
+        "desc": "Branch device DFP connection changed"
+      },
+      {
+        "bits": "1",
+        "name": "POST_LT_ADJ_REQ_IN_PROGRESS",
+        "desc": ""
+      },
+      {
+        "bits": "0",
+        "name": "INTERLANE_ALIGN_DONE",
+        "desc": "Inter-lane alignment done"
+      }
+    ]
+  },
+  "0x00205": {
+    "name": "SINK_STATUS",
+    "fields": [
+      {
+        "bits": "1",
+        "name": "RECEIVE_PORT_1_STATUS",
+        "desc": "0=out of sync, 1=in sync"
+      },
+      {
+        "bits": "0",
+        "name": "RECEIVE_PORT_0_STATUS",
+        "desc": "0=out of sync, 1=in sync"
+      }
+    ]
+  },
+  "0x00206": {
+    "name": "ADJUST_REQUEST_LANE0_1",
+    "fields": [
+      {
+        "bits": "1:0",
+        "name": "VOLTAGE_SWING_LANE0",
+        "desc": "00b-11b=Level 0-3",
+        "values": {
+          "283": "Level 0-3"
+        }
+      },
+      {
+        "bits": "3:2",
+        "name": "PRE_EMPHASIS_LANE0",
+        "desc": "00b-11b=Level 0-3",
+        "values": {
+          "283": "Level 0-3"
+        }
+      },
+      {
+        "bits": "5:4",
+        "name": "VOLTAGE_SWING_LANE1",
+        "desc": "00b-11b=Level 0-3",
+        "values": {
+          "283": "Level 0-3"
+        }
+      },
+      {
+        "bits": "7:6",
+        "name": "PRE_EMPHASIS_LANE1",
+        "desc": "00b-11b=Level 0-3",
+        "values": {
+          "283": "Level 0-3"
+        }
+      },
+      {
+        "bits": "1",
+        "name": "RC Buffer Overflow",
+        "desc": "Sticky, write 1 to clear"
+      },
+      {
+        "bits": "2",
+        "name": "Chunk Length Error",
+        "desc": "Sticky, write 1 to clear"
+      }
+    ]
+  },
+  "0x00207": {
+    "name": "ADJUST_REQUEST_LANE2_3",
+    "fields": [
+      {
+        "bits": "1:0",
+        "name": "VOLTAGE_SWING_LANE2",
+        "desc": "00b-11b=Level 0-3"
+      },
+      {
+        "bits": "3:2",
+        "name": "PRE_EMPHASIS_LANE2",
+        "desc": "00b-11b=Level 0-3"
+      },
+      {
+        "bits": "5:4",
+        "name": "VOLTAGE_SWING_LANE3",
+        "desc": "00b-11b=Level 0-3"
+      },
+      {
+        "bits": "7:6",
+        "name": "PRE_EMPHASIS_LANE3",
+        "desc": "00b-11b=Level 0-3"
+      }
+    ]
+  },
+  "0x0020c": {
+    "name": "DP_ADJUST_REQUEST_POST_CURSOR2",
+    "fields": [
+      {
+        "name": "DP_ADJUST_POST_CURSOR2_LANE0_MASK",
+        "bits": "1:0"
+      },
+      {
+        "name": "DP_ADJUST_POST_CURSOR2_LANE1_MASK",
+        "bits": "3:2"
+      },
+      {
+        "name": "DP_ADJUST_POST_CURSOR2_LANE2_MASK",
+        "bits": "5:4"
+      },
+      {
+        "name": "DP_ADJUST_POST_CURSOR2_LANE3_MASK",
+        "bits": "7:6"
+      }
+    ]
+  },
+  "0x00218": {
+    "name": "TEST_REQUEST",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "TEST_LINK_TRAINING"
+      },
+      {
+        "bits": "1",
+        "name": "TEST_PATTERN"
+      },
+      {
+        "bits": "2",
+        "name": "TEST_EDID_READ"
+      },
+      {
+        "bits": "3",
+        "name": "PHY_TEST_PATTERN"
+      }
+    ]
+  },
+  "0x00219": {
+    "name": "TEST_LINK_RATE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "TEST_LINK_RATE",
+        "desc": "06h=RBR, 0Ah=HBR, 14h=HBR2, 1Eh=HBR3"
+      }
+    ]
+  },
+  "0x00220": {
+    "name": "TEST_LANE_COUNT",
+    "fields": [
+      {
+        "bits": "4:0",
+        "name": "TEST_LANE_COUNT",
+        "desc": "01h/02h/04h"
+      }
+    ]
+  },
+  "0x00221": {
+    "name": "TEST_PATTERN",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "TEST_PATTERN",
+        "desc": "00h=None, 01h=Color ramps, 02h=B&W vertical lines, 03h=Color square"
+      },
+      {
+        "bits": "2:1",
+        "name": "TEST_COLOR_FORMAT",
+        "desc": "00b=RGB, 01b=YCbCr422, 10b=YCbCr444",
+        "values": {
+          "11": "RGB",
+          "267": "YCbCr444"
+        }
+      },
+      {
+        "bits": "3",
+        "name": "TEST_DYNAMIC_RANGE",
+        "desc": "0=VESA, 1=CTA",
+        "values": {
+          "0": "VESA"
+        }
+      },
+      {
+        "bits": "7:5",
+        "name": "TEST_BIT_DEPTH",
+        "desc": "000b=6, 001b=8, 010b=10, 011b=12, 100b=16",
+        "values": {
+          "11": "6",
+          "267": "10",
+          "4107": "16"
+        }
+      }
+    ]
+  },
+  "0x00222": {
+    "name": "DP_TEST_H_TOTAL_HI",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00223": {
+    "name": "DP_TEST_H_TOTAL_LO",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00224": {
+    "name": "DP_TEST_V_TOTAL_HI",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00225": {
+    "name": "DP_TEST_V_TOTAL_LO",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00226": {
+    "name": "DP_TEST_H_START_HI",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00227": {
+    "name": "DP_TEST_H_START_LO",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00228": {
+    "name": "DP_TEST_V_START_HI",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00229": {
+    "name": "DP_TEST_V_START_LO",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0022a": {
+    "name": "DP_TEST_HSYNC_HI",
+    "fields": [
+      {
+        "name": "DP_TEST_HSYNC_POLARITY",
+        "bits": "7"
+      },
+      {
+        "name": "DP_TEST_HSYNC_WIDTH_HI_MASK",
+        "bits": "6:0"
+      }
+    ]
+  },
+  "0x0022b": {
+    "name": "DP_TEST_HSYNC_WIDTH_LO",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0022c": {
+    "name": "DP_TEST_VSYNC_HI",
+    "fields": [
+      {
+        "name": "DP_TEST_VSYNC_POLARITY",
+        "bits": "7"
+      },
+      {
+        "name": "DP_TEST_VSYNC_WIDTH_HI_MASK",
+        "bits": "6:0"
+      }
+    ]
+  },
+  "0x0022d": {
+    "name": "DP_TEST_VSYNC_WIDTH_LO",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0022e": {
+    "name": "DP_TEST_H_WIDTH_HI",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0022f": {
+    "name": "DP_TEST_H_WIDTH_LO",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00230": {
+    "name": "DP_TEST_V_HEIGHT_HI",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00231": {
+    "name": "DP_TEST_V_HEIGHT_LO",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00232": {
+    "name": "DP_TEST_MISC0",
+    "fields": [
+      {
+        "name": "DP_TEST_SYNC_CLOCK",
+        "bits": "0"
+      },
+      {
+        "name": "DP_TEST_COLOR_FORMAT_MASK",
+        "bits": "2:1"
+      },
+      {
+        "name": "DP_COLOR_FORMAT_RGB",
+        "bits": "0:1"
+      },
+      {
+        "name": "DP_COLOR_FORMAT_YCbCr422",
+        "bits": "1"
+      },
+      {
+        "name": "DP_COLOR_FORMAT_YCbCr444",
+        "bits": "2:1"
+      },
+      {
+        "name": "DP_TEST_DYNAMIC_RANGE_VESA",
+        "bits": "2:3"
+      },
+      {
+        "name": "DP_TEST_DYNAMIC_RANGE_CEA",
+        "bits": "3"
+      },
+      {
+        "name": "DP_TEST_YCBCR_COEFFICIENTS",
+        "bits": "4"
+      },
+      {
+        "name": "DP_YCBCR_COEFFICIENTS_ITU601",
+        "bits": "3:4"
+      },
+      {
+        "name": "DP_YCBCR_COEFFICIENTS_ITU709",
+        "bits": "4"
+      },
+      {
+        "name": "DP_TEST_BIT_DEPTH_MASK",
+        "bits": "7:5"
+      },
+      {
+        "name": "DP_TEST_BIT_DEPTH_6",
+        "bits": "4:5"
+      },
+      {
+        "name": "DP_TEST_BIT_DEPTH_8",
+        "bits": "5"
+      },
+      {
+        "name": "DP_TEST_BIT_DEPTH_10",
+        "bits": "6:5"
+      },
+      {
+        "name": "DP_TEST_BIT_DEPTH_12",
+        "bits": "6:5"
+      },
+      {
+        "name": "DP_TEST_BIT_DEPTH_16",
+        "bits": "7:5"
+      }
+    ]
+  },
+  "0x00233": {
+    "name": "DP_TEST_MISC1",
+    "fields": [
+      {
+        "name": "DP_TEST_REFRESH_DENOMINATOR",
+        "bits": "0"
+      },
+      {
+        "name": "DP_TEST_INTERLACED",
+        "bits": "1"
+      }
+    ]
+  },
+  "0x00234": {
+    "name": "DP_TEST_REFRESH_RATE_NUMERATOR",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00240": {
+    "name": "DP_TEST_CRC_R_CR",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00242": {
+    "name": "DP_TEST_CRC_G_Y",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00244": {
+    "name": "DP_TEST_CRC_B_CB",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00246": {
+    "name": "DP_TEST_SINK_MISC",
+    "fields": [
+      {
+        "name": "DP_TEST_CRC_SUPPORTED",
+        "bits": "5"
+      },
+      {
+        "name": "DP_TEST_COUNT_MASK",
+        "bits": "3:0"
+      }
+    ]
+  },
+  "0x00248": {
+    "name": "PHY_TEST_PATTERN",
+    "fields": [
+      {
+        "bits": "2:0",
+        "name": "PHY_TEST_PATTERN_SEL",
+        "desc": "000b=None, 001b=D10.2, 010b=SER, 011b=PRBS7, 100b=80-bit custom, 101-111b=CP2520",
+        "values": {
+          "11": "None",
+          "267": "SER",
+          "4379": "CP2520"
+        }
+      }
+    ]
+  },
+  "0x00249": {
+    "name": "DP_PHY_SQUARE_PATTERN",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0024a": {
+    "name": "DP_TEST_HBR2_SCRAMBLER_RESET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00250": {
+    "name": "DP_TEST_80BIT_CUSTOM_PATTERN_7_0",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00251": {
+    "name": "DP_TEST_80BIT_CUSTOM_PATTERN_15_8",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00252": {
+    "name": "DP_TEST_80BIT_CUSTOM_PATTERN_23_16",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00253": {
+    "name": "DP_TEST_80BIT_CUSTOM_PATTERN_31_24",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00254": {
+    "name": "DP_TEST_80BIT_CUSTOM_PATTERN_39_32",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00255": {
+    "name": "DP_TEST_80BIT_CUSTOM_PATTERN_47_40",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00256": {
+    "name": "DP_TEST_80BIT_CUSTOM_PATTERN_55_48",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00257": {
+    "name": "DP_TEST_80BIT_CUSTOM_PATTERN_63_56",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00258": {
+    "name": "DP_TEST_80BIT_CUSTOM_PATTERN_71_64",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00259": {
+    "name": "DP_TEST_80BIT_CUSTOM_PATTERN_79_72",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00260": {
+    "name": "TEST_RESPONSE",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "TEST_ACK"
+      },
+      {
+        "bits": "1",
+        "name": "TEST_NAK"
+      },
+      {
+        "bits": "2",
+        "name": "TEST_EDID_CHECKSUM_WRITE"
+      }
+    ]
+  },
+  "0x00261": {
+    "name": "DP_TEST_EDID_CHECKSUM",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00270": {
+    "name": "TEST_SINK",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "TEST_SINK_START",
+        "desc": "0=Stop CRC, 1=Start CRC",
+        "values": {
+          "0": "Stop CRC"
+        }
+      }
+    ]
+  },
+  "0x00271": {
+    "name": "DP_TEST_AUDIO_MODE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00272": {
+    "name": "DP_TEST_AUDIO_PATTERN_TYPE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00273": {
+    "name": "DP_TEST_AUDIO_PERIOD_CH1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00274": {
+    "name": "DP_TEST_AUDIO_PERIOD_CH2",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00275": {
+    "name": "DP_TEST_AUDIO_PERIOD_CH3",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00276": {
+    "name": "DP_TEST_AUDIO_PERIOD_CH4",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00277": {
+    "name": "DP_TEST_AUDIO_PERIOD_CH5",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00278": {
+    "name": "DP_TEST_AUDIO_PERIOD_CH6",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00279": {
+    "name": "DP_TEST_AUDIO_PERIOD_CH7",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0027a": {
+    "name": "FEC_STATUS",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "FEC_DECODE_EN_DETECTED"
+      },
+      {
+        "bits": "1",
+        "name": "FEC_DECODE_DIS_DETECTED"
+      },
+      {
+        "bits": "6:2",
+        "name": "RESERVED"
+      },
+      {
+        "bits": "7",
+        "name": "FEC_ERROR_COUNT_OVERFLOW"
+      }
+    ]
+  },
+  "0x00280": {
+    "name": "FEC_STATUS",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "FEC_DECODE_EN_DETECTED",
+        "desc": "Sticky, write 1 to clear"
+      },
+      {
+        "bits": "1",
+        "name": "FEC_DECODE_DIS_DETECTED",
+        "desc": "Sticky, write 1 to clear"
+      }
+    ]
+  },
+  "0x00281": {
+    "name": "FEC_ERROR_COUNT",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "FEC_ERROR_COUNT",
+        "desc": "15-bit FEC error count + 1 valid bit"
+      }
+    ]
+  },
+  "0x00282": {
+    "name": "DP_FEC_ERROR_COUNT_MSB",
+    "fields": [
+      {
+        "name": "DP_FEC_ERROR_COUNT_MASK",
+        "bits": "6:0"
+      },
+      {
+        "name": "DP_FEC_ERR_COUNT_VALID",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x002c0": {
+    "name": "PAYLOAD_TABLE_UPDATE_STATUS",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "VC Payload ID Table Updated",
+        "desc": "0=not updated, 1=updated",
+        "values": {
+          "0": "not updated"
+        }
+      },
+      {
+        "bits": "1",
+        "name": "ACT Handled",
+        "desc": "0=not handled, 1=handled",
+        "values": {
+          "0": "not handled"
+        }
+      }
+    ]
+  },
+  "0x002c1": {
+    "name": "VC_PAYLOAD_ID_SLOT_1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VC_PAYLOAD_ID",
+        "desc": "VC Payload ID per time slot"
+      }
+    ]
+  },
+  "0x00300": {
+    "name": "DP_SOURCE_OUI",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00309": {
+    "name": "Hardware Revision",
+    "fields": [
+      {
+        "bits": "3:0",
+        "name": "Minor HW revision",
+        "desc": "W/R"
+      }
+    ]
+  },
+  "0x0030a": {
+    "name": "Firmware Major Revision",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "Major firmware revision",
+        "desc": "W/R"
+      }
+    ]
+  },
+  "0x00400": {
+    "name": "DP_SINK_OUI",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0040a": {
+    "name": "Firmware Major Revision",
+    "fields": []
+  },
+  "0x00500": {
+    "name": "DP_BRANCH_OUI",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00503": {
+    "name": "DP_BRANCH_ID",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00509": {
+    "name": "DP_BRANCH_REVISION_START",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0050a": {
+    "name": "Firmware Major Revision",
+    "fields": []
+  },
+  "0x00600": {
+    "name": "SET_POWER",
+    "fields": [
+      {
+        "bits": "7",
+        "name": "SET_DN_DEVICE_DP_PWR_18V",
+        "desc": "1=Set downstream DP_PWR to 18V"
+      },
+      {
+        "bits": "6",
+        "name": "SET_DN_DEVICE_DP_PWR_12V",
+        "desc": "1=Set downstream DP_PWR to 12V"
+      },
+      {
+        "bits": "5",
+        "name": "SET_DN_DEVICE_DP_PWR_5V",
+        "desc": "1=Set downstream DP_PWR to 5V"
+      },
+      {
+        "bits": "2:0",
+        "name": "SET_POWER_STATE",
+        "desc": "001b=D0 (normal), 010b=D3 (power-down), 101b=D3 AUX fully powered",
+        "values": {
+          "1": "D0 (normal)",
+          "2": "D3 (power-down)",
+          "5": "D3 AUX fully powered"
+        }
+      }
+    ]
+  },
+  "0x00700": {
+    "name": "DP_EDP_DPCD_REV",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00701": {
+    "name": "DP_EDP_GENERAL_CAP_1",
+    "fields": [
+      {
+        "name": "DP_EDP_TCON_BACKLIGHT_ADJUSTMENT_CAP",
+        "bits": "0"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_PIN_ENABLE_CAP",
+        "bits": "1"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_AUX_ENABLE_CAP",
+        "bits": "2"
+      },
+      {
+        "name": "DP_EDP_PANEL_SELF_TEST_PIN_ENABLE_CAP",
+        "bits": "3"
+      },
+      {
+        "name": "DP_EDP_PANEL_SELF_TEST_AUX_ENABLE_CAP",
+        "bits": "4"
+      },
+      {
+        "name": "DP_EDP_FRC_ENABLE_CAP",
+        "bits": "5"
+      },
+      {
+        "name": "DP_EDP_COLOR_ENGINE_CAP",
+        "bits": "6"
+      },
+      {
+        "name": "DP_EDP_SET_POWER_CAP",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x00702": {
+    "name": "DP_EDP_BACKLIGHT_ADJUSTMENT_CAP",
+    "fields": [
+      {
+        "name": "DP_EDP_BACKLIGHT_BRIGHTNESS_PWM_PIN_CAP",
+        "bits": "0"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_BRIGHTNESS_AUX_SET_CAP",
+        "bits": "1"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_BRIGHTNESS_BYTE_COUNT",
+        "bits": "2"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_AUX_PWM_PRODUCT_CAP",
+        "bits": "3"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_FREQ_PWM_PIN_PASSTHRU_CAP",
+        "bits": "4"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_FREQ_AUX_SET_CAP",
+        "bits": "5"
+      },
+      {
+        "name": "DP_EDP_DYNAMIC_BACKLIGHT_CAP",
+        "bits": "6"
+      },
+      {
+        "name": "DP_EDP_VBLANK_BACKLIGHT_UPDATE_CAP",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x00703": {
+    "name": "DP_EDP_GENERAL_CAP_2",
+    "fields": [
+      {
+        "name": "DP_EDP_OVERDRIVE_ENGINE_ENABLED",
+        "bits": "0"
+      },
+      {
+        "name": "DP_EDP_X_REGION_CAP_MASK",
+        "bits": "3:0"
+      },
+      {
+        "name": "DP_EDP_Y_REGION_CAP_MASK",
+        "bits": "7:4"
+      }
+    ]
+  },
+  "0x00704": {
+    "name": "DP_EDP_GENERAL_CAP_3",
+    "fields": [
+      {
+        "name": "DP_EDP_X_REGION_CAP_MASK",
+        "bits": "3:0"
+      },
+      {
+        "name": "DP_EDP_Y_REGION_CAP_MASK",
+        "bits": "7:4"
+      }
+    ]
+  },
+  "0x00720": {
+    "name": "DP_EDP_DISPLAY_CONTROL_REGISTER",
+    "fields": [
+      {
+        "name": "DP_EDP_BACKLIGHT_ENABLE",
+        "bits": "0"
+      },
+      {
+        "name": "DP_EDP_BLACK_VIDEO_ENABLE",
+        "bits": "1"
+      },
+      {
+        "name": "DP_EDP_FRC_ENABLE",
+        "bits": "2"
+      },
+      {
+        "name": "DP_EDP_COLOR_ENGINE_ENABLE",
+        "bits": "3"
+      },
+      {
+        "name": "DP_EDP_VBLANK_BACKLIGHT_UPDATE_ENABLE",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x00721": {
+    "name": "DP_EDP_BACKLIGHT_MODE_SET_REGISTER",
+    "fields": [
+      {
+        "name": "DP_EDP_BACKLIGHT_CONTROL_MODE_MASK",
+        "bits": "1:0"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_CONTROL_MODE_PWM",
+        "bits": "-1:0"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_CONTROL_MODE_PRESET",
+        "bits": "0"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_CONTROL_MODE_DPCD",
+        "bits": "1:0"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_CONTROL_MODE_PRODUCT",
+        "bits": "1:0"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_FREQ_PWM_PIN_PASSTHRU_ENABLE",
+        "bits": "2"
+      },
+      {
+        "name": "DP_EDP_BACKLIGHT_FREQ_AUX_SET_ENABLE",
+        "bits": "3"
+      },
+      {
+        "name": "DP_EDP_DYNAMIC_BACKLIGHT_ENABLE",
+        "bits": "4"
+      },
+      {
+        "name": "DP_EDP_REGIONAL_BACKLIGHT_ENABLE",
+        "bits": "5"
+      }
+    ]
+  },
+  "0x00722": {
+    "name": "DP_EDP_BACKLIGHT_BRIGHTNESS_MSB",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00723": {
+    "name": "DP_EDP_BACKLIGHT_BRIGHTNESS_LSB",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00724": {
+    "name": "DP_EDP_PWMGEN_BIT_COUNT",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00725": {
+    "name": "DP_EDP_PWMGEN_BIT_COUNT_CAP_MIN",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00726": {
+    "name": "DP_EDP_PWMGEN_BIT_COUNT_CAP_MAX",
+    "fields": [
+      {
+        "name": "DP_EDP_PWMGEN_BIT_COUNT_MASK",
+        "bits": "4:0"
+      }
+    ]
+  },
+  "0x00727": {
+    "name": "DP_EDP_BACKLIGHT_CONTROL_STATUS",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00728": {
+    "name": "DP_EDP_BACKLIGHT_FREQ_SET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0072a": {
+    "name": "DP_EDP_BACKLIGHT_FREQ_CAP_MIN_MSB",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0072b": {
+    "name": "DP_EDP_BACKLIGHT_FREQ_CAP_MIN_MID",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0072c": {
+    "name": "DP_EDP_BACKLIGHT_FREQ_CAP_MIN_LSB",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0072d": {
+    "name": "DP_EDP_BACKLIGHT_FREQ_CAP_MAX_MSB",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0072e": {
+    "name": "DP_EDP_BACKLIGHT_FREQ_CAP_MAX_MID",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0072f": {
+    "name": "DP_EDP_BACKLIGHT_FREQ_CAP_MAX_LSB",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00732": {
+    "name": "DP_EDP_DBC_MINIMUM_BRIGHTNESS_SET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00733": {
+    "name": "PAYLOAD_TABLE_UPDATE",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "PAYLOAD_TABLE_UPDATE"
+      },
+      {
+        "bits": "7:1",
+        "name": "RESERVED"
+      }
+    ]
+  },
+  "0x00740": {
+    "name": "DP_EDP_REGIONAL_BACKLIGHT_BASE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x00741": {
+    "name": "DP_EDP_REGIONAL_BACKLIGHT_0",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x007a4": {
+    "name": "DP_EDP_MSO_LINK_CAPABILITIES",
+    "fields": [
+      {
+        "name": "DP_EDP_MSO_NUMBER_OF_LINKS_MASK",
+        "bits": "2:0"
+      },
+      {
+        "name": "DP_EDP_MSO_INDEPENDENT_LINK_BIT",
+        "bits": "3"
+      }
+    ]
+  },
+  "0x01000": {
+    "name": "DP_SIDEBAND_MSG_DOWN_REQ_BASE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x01200": {
+    "name": "DP_SIDEBAND_MSG_UP_REP_BASE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x01400": {
+    "name": "DP_SIDEBAND_MSG_DOWN_REP_BASE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x01600": {
+    "name": "DP_SIDEBAND_MSG_UP_REQ_BASE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x02002": {
+    "name": "SINK_COUNT_ESI",
+    "fields": [
+      {
+        "bits": "6",
+        "name": "CP_READY",
+        "desc": "Same as 00200h"
+      },
+      {
+        "bits": "7,5:0",
+        "name": "SINK_COUNT",
+        "desc": "Same as 00200h"
+      }
+    ]
+  },
+  "0x02003": {
+    "name": "DEVICE_SERVICE_IRQ_VECTOR_ESI0",
+    "fields": [
+      {
+        "bits": "6",
+        "name": "SINK_SPECIFIC_IRQ",
+        "desc": "W1C"
+      },
+      {
+        "bits": "5",
+        "name": "UP_REQ_MSG_RDY",
+        "desc": "1=read UP_REQ_MSG",
+        "values": {
+          "0": "no message",
+          "1": "read UP_REQ_MSG"
+        }
+      },
+      {
+        "bits": "4",
+        "name": "DOWN_REP_MSG_RDY",
+        "desc": "1=read DOWN_REP_MSG",
+        "values": {
+          "0": "no message",
+          "1": "read DOWN_REP_MSG"
+        }
+      },
+      {
+        "bits": "3",
+        "name": "MCCS_IRQ",
+        "desc": "W1C"
+      },
+      {
+        "bits": "2",
+        "name": "CP_IRQ",
+        "desc": "W1C"
+      },
+      {
+        "bits": "1",
+        "name": "AUTOMATED_TEST_REQUEST",
+        "desc": "W1C"
+      },
+      {
+        "bits": "0",
+        "name": "RESERVED",
+        "desc": "W1C"
+      }
+    ]
+  },
+  "0x02004": {
+    "name": "DEVICE_SERVICE_IRQ_VECTOR_ESI1",
+    "fields": [
+      {
+        "bits": "2",
+        "name": "CEC_IRQ",
+        "desc": "W1C"
+      },
+      {
+        "bits": "1",
+        "name": "LOCK_ACQUISITION_REQUEST",
+        "desc": "W1C"
+      },
+      {
+        "bits": "0",
+        "name": "RX_GTC_PRIMARY_REQ_STATUS_CHANGE",
+        "desc": "W1C"
+      }
+    ]
+  },
+  "0x02005": {
+    "name": "LINK_SERVICE_IRQ_VECTOR_ESI0",
+    "fields": [
+      {
+        "bits": "4",
+        "name": "CONNECTED_OFF_ENTRY_REQUESTED",
+        "desc": "W1C"
+      },
+      {
+        "bits": "3",
+        "name": "HDMI_LINK_STATUS_CHANGED",
+        "desc": "W1C"
+      },
+      {
+        "bits": "2",
+        "name": "STREAM_STATUS_CHANGED",
+        "desc": "1=QUERY_STREAM_ENCRYPTION_STATUS"
+      },
+      {
+        "bits": "1",
+        "name": "LINK_STATUS_CHANGED",
+        "desc": "1=read Link/Sink Device Status"
+      },
+      {
+        "bits": "0",
+        "name": "RX_CAP_CHANGED",
+        "desc": "1=read Receiver Capability"
+      }
+    ]
+  },
+  "0x02006": {
+    "name": "DP_PSR_ERROR_STATUS",
+    "fields": [
+      {
+        "name": "DP_PSR_LINK_CRC_ERROR",
+        "bits": "0"
+      },
+      {
+        "name": "DP_PSR_RFB_STORAGE_ERROR",
+        "bits": "1"
+      },
+      {
+        "name": "DP_PSR_VSC_SDP_UNCORRECTABLE_ERROR",
+        "bits": "2"
+      }
+    ]
+  },
+  "0x02007": {
+    "name": "DP_PSR_ESI",
+    "fields": [
+      {
+        "name": "DP_PSR_CAPS_CHANGE",
+        "bits": "0"
+      }
+    ]
+  },
+  "0x02008": {
+    "name": "DP_PSR_STATUS",
+    "fields": [
+      {
+        "name": "DP_PSR_SINK_STATE_MASK",
+        "bits": "2:0"
+      }
+    ]
+  },
+  "0x02009": {
+    "name": "DP_SYNCHRONIZATION_LATENCY_IN_SINK",
+    "fields": [
+      {
+        "name": "DP_MAX_RESYNC_FRAME_COUNT_MASK",
+        "bits": "3:0"
+      },
+      {
+        "name": "DP_LAST_ACTUAL_SYNCHRONIZATION_LATENCY_MASK",
+        "bits": "7:4"
+      }
+    ]
+  },
+  "0x0200a": {
+    "name": "DP_LAST_RECEIVED_PSR_SDP",
+    "fields": [
+      {
+        "name": "DP_PSR_STATE_BIT",
+        "bits": "0"
+      },
+      {
+        "name": "DP_UPDATE_RFB_BIT",
+        "bits": "1"
+      },
+      {
+        "name": "DP_CRC_VALID_BIT",
+        "bits": "2"
+      },
+      {
+        "name": "DP_SU_VALID",
+        "bits": "3"
+      },
+      {
+        "name": "DP_FIRST_SCAN_LINE_SU_REGION",
+        "bits": "4"
+      },
+      {
+        "name": "DP_LAST_SCAN_LINE_SU_REGION",
+        "bits": "5"
+      },
+      {
+        "name": "DP_Y_COORDINATE_VALID",
+        "bits": "6"
+      }
+    ]
+  },
+  "0x0200b": {
+    "name": "DP_RECEIVER_ALPM_STATUS",
+    "fields": [
+      {
+        "name": "DP_ALPM_LOCK_TIMEOUT_ERROR",
+        "bits": "0"
+      }
+    ]
+  },
+  "0x0200c": {
+    "name": "LANE0_1_STATUS_ESI",
+    "fields": [
+      {
+        "bits": "6",
+        "name": "LANE1_SYMBOL_LOCKED",
+        "desc": ""
+      },
+      {
+        "bits": "5",
+        "name": "LANE1_CHANNEL_EQ_DONE",
+        "desc": ""
+      },
+      {
+        "bits": "4",
+        "name": "LANE1_CR_DONE",
+        "desc": ""
+      },
+      {
+        "bits": "2",
+        "name": "LANE0_SYMBOL_LOCKED",
+        "desc": ""
+      },
+      {
+        "bits": "1",
+        "name": "LANE0_CHANNEL_EQ_DONE",
+        "desc": ""
+      },
+      {
+        "bits": "0",
+        "name": "LANE0_CR_DONE",
+        "desc": ""
+      }
+    ]
+  },
+  "0x0200d": {
+    "name": "LANE2_3_STATUS_ESI",
+    "fields": [
+      {
+        "bits": "6",
+        "name": "LANE3_SYMBOL_LOCKED",
+        "desc": ""
+      },
+      {
+        "bits": "5",
+        "name": "LANE3_CHANNEL_EQ_DONE",
+        "desc": ""
+      },
+      {
+        "bits": "4",
+        "name": "LANE3_CR_DONE",
+        "desc": ""
+      },
+      {
+        "bits": "2",
+        "name": "LANE2_SYMBOL_LOCKED",
+        "desc": ""
+      },
+      {
+        "bits": "1",
+        "name": "LANE2_CHANNEL_EQ_DONE",
+        "desc": ""
+      },
+      {
+        "bits": "0",
+        "name": "LANE2_CR_DONE",
+        "desc": ""
+      }
+    ]
+  },
+  "0x0200e": {
+    "name": "LANE_ALIGN_STATUS_UPDATED_ESI",
+    "fields": [
+      {
+        "bits": "7",
+        "name": "LINK_STATUS_UPDATED",
+        "desc": ""
+      },
+      {
+        "bits": "6",
+        "name": "DOWNSTREAM_PORT_STATUS_CHANGED",
+        "desc": ""
+      },
+      {
+        "bits": "1",
+        "name": "POST_LT_ADJ_REQ_IN_PROGRESS",
+        "desc": ""
+      },
+      {
+        "bits": "0",
+        "name": "INTERLANE_ALIGN_DONE",
+        "desc": ""
+      }
+    ]
+  },
+  "0x0200f": {
+    "name": "SINK_STATUS_ESI",
+    "fields": [
+      {
+        "bits": "0",
+        "name": "RECEIVE_PORT_0_STATUS",
+        "desc": "0=out of sync, 1=in sync",
+        "values": {
+          "0": "out of sync"
+        }
+      },
+      {
+        "bits": "1",
+        "name": "RECEIVE_PORT_1_STATUS"
+      }
+    ]
+  },
+  "0x02200": {
+    "name": "DP_DP13_DPCD_REV",
+    "fields": [
+      {
+        "name": "DP_UHBR10",
+        "bits": "0"
+      },
+      {
+        "name": "DP_UHBR20",
+        "bits": "1"
+      },
+      {
+        "name": "DP_UHBR13_5",
+        "bits": "2"
+      },
+      {
+        "name": "DP_128B132B_TRAINING_AUX_RD_INTERVAL_1MS_UNIT",
+        "bits": "7"
+      },
+      {
+        "name": "DP_128B132B_TRAINING_AUX_RD_INTERVAL_MASK",
+        "bits": "6:0"
+      }
+    ]
+  },
+  "0x02210": {
+    "name": "DP_DPRX_FEATURE_ENUMERATION_LIST",
+    "fields": [
+      {
+        "name": "DP_GTC_CAP",
+        "bits": "0"
+      },
+      {
+        "name": "DP_SST_SPLIT_SDP_CAP",
+        "bits": "1"
+      },
+      {
+        "name": "DP_AV_SYNC_CAP",
+        "bits": "2"
+      },
+      {
+        "name": "DP_VSC_SDP_EXT_FOR_COLORIMETRY_SUPPORTED",
+        "bits": "3"
+      },
+      {
+        "name": "DP_VSC_EXT_VESA_SDP_SUPPORTED",
+        "bits": "4"
+      },
+      {
+        "name": "DP_VSC_EXT_VESA_SDP_CHAINING_SUPPORTED",
+        "bits": "5"
+      },
+      {
+        "name": "DP_VSC_EXT_CEA_SDP_SUPPORTED",
+        "bits": "6"
+      },
+      {
+        "name": "DP_VSC_EXT_CEA_SDP_CHAINING_SUPPORTED",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x02215": {
+    "name": "DP_128B132B_SUPPORTED_LINK_RATES",
+    "fields": [
+      {
+        "name": "DP_UHBR10",
+        "bits": "0"
+      },
+      {
+        "name": "DP_UHBR20",
+        "bits": "1"
+      },
+      {
+        "name": "DP_UHBR13_5",
+        "bits": "2"
+      }
+    ]
+  },
+  "0x02216": {
+    "name": "DP_128B132B_TRAINING_AUX_RD_INTERVAL",
+    "fields": [
+      {
+        "name": "DP_128B132B_TRAINING_AUX_RD_INTERVAL_1MS_UNIT",
+        "bits": "7"
+      },
+      {
+        "name": "DP_128B132B_TRAINING_AUX_RD_INTERVAL_MASK",
+        "bits": "6:0"
+      }
+    ]
+  },
+  "0x02230": {
+    "name": "DP_TEST_264BIT_CUSTOM_PATTERN_7_0",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x02250": {
+    "name": "DP_TEST_264BIT_CUSTOM_PATTERN_263_256",
+    "fields": [
+      {
+        "name": "DP_DSC_DECODER_0_MAXIMUM_SLICE_COUNT_MASK",
+        "bits": "0"
+      }
+    ]
+  },
+  "0x02260": {
+    "name": "DP_DSC_SUPPORT_AND_DSC_DECODER_COUNT",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x02270": {
+    "name": "DP_DSC_MAX_SLICE_COUNT_AND_AGGREGATION_0",
+    "fields": [
+      {
+        "name": "DP_DSC_DECODER_0_MAXIMUM_SLICE_COUNT_MASK",
+        "bits": "0"
+      }
+    ]
+  },
+  "0x03000": {
+    "name": "DP_CEC_TUNNELING_CAPABILITY",
+    "fields": [
+      {
+        "name": "DP_CEC_TUNNELING_CAPABLE",
+        "bits": "0"
+      },
+      {
+        "name": "DP_CEC_SNOOPING_CAPABLE",
+        "bits": "1"
+      },
+      {
+        "name": "DP_CEC_MULTIPLE_LA_CAPABLE",
+        "bits": "2"
+      }
+    ]
+  },
+  "0x03001": {
+    "name": "DP_CEC_TUNNELING_CONTROL",
+    "fields": [
+      {
+        "name": "DP_CEC_TUNNELING_ENABLE",
+        "bits": "0"
+      },
+      {
+        "name": "DP_CEC_SNOOPING_ENABLE",
+        "bits": "1"
+      }
+    ]
+  },
+  "0x03002": {
+    "name": "DP_CEC_RX_MESSAGE_INFO",
+    "fields": [
+      {
+        "name": "DP_CEC_RX_MESSAGE_LEN_MASK",
+        "bits": "3:0"
+      },
+      {
+        "name": "DP_CEC_RX_MESSAGE_HPD_STATE",
+        "bits": "4"
+      },
+      {
+        "name": "DP_CEC_RX_MESSAGE_HPD_LOST",
+        "bits": "5"
+      },
+      {
+        "name": "DP_CEC_RX_MESSAGE_ACKED",
+        "bits": "6"
+      },
+      {
+        "name": "DP_CEC_RX_MESSAGE_ENDED",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x03003": {
+    "name": "DP_CEC_TX_MESSAGE_INFO",
+    "fields": [
+      {
+        "name": "DP_CEC_TX_MESSAGE_LEN_MASK",
+        "bits": "3:0"
+      },
+      {
+        "name": "DP_CEC_TX_RETRY_COUNT_MASK",
+        "bits": "6:4"
+      },
+      {
+        "name": "DP_CEC_TX_MESSAGE_SEND",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x03004": {
+    "name": "DP_CEC_TUNNELING_IRQ_FLAGS",
+    "fields": [
+      {
+        "name": "DP_CEC_RX_MESSAGE_INFO_VALID",
+        "bits": "0"
+      },
+      {
+        "name": "DP_CEC_RX_MESSAGE_OVERFLOW",
+        "bits": "1"
+      },
+      {
+        "name": "DP_CEC_TX_MESSAGE_SENT",
+        "bits": "4"
+      },
+      {
+        "name": "DP_CEC_TX_LINE_ERROR",
+        "bits": "5"
+      },
+      {
+        "name": "DP_CEC_TX_ADDRESS_NACK_ERROR",
+        "bits": "6"
+      },
+      {
+        "name": "DP_CEC_TX_DATA_NACK_ERROR",
+        "bits": "7"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_0",
+        "bits": "0"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_1",
+        "bits": "1"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_2",
+        "bits": "2"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_3",
+        "bits": "3"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_4",
+        "bits": "4"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_5",
+        "bits": "5"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_6",
+        "bits": "6"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_7",
+        "bits": "7"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_8",
+        "bits": "0"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_9",
+        "bits": "1"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_10",
+        "bits": "2"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_11",
+        "bits": "3"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_12",
+        "bits": "4"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_13",
+        "bits": "5"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_14",
+        "bits": "6"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_15",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x0300e": {
+    "name": "DP_CEC_LOGICAL_ADDRESS_MASK",
+    "fields": [
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_0",
+        "bits": "0"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_1",
+        "bits": "1"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_2",
+        "bits": "2"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_3",
+        "bits": "3"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_4",
+        "bits": "4"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_5",
+        "bits": "5"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_6",
+        "bits": "6"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_7",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x0300f": {
+    "name": "DP_CEC_LOGICAL_ADDRESS_MASK_2",
+    "fields": [
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_8",
+        "bits": "0"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_9",
+        "bits": "1"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_10",
+        "bits": "2"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_11",
+        "bits": "3"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_12",
+        "bits": "4"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_13",
+        "bits": "5"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_14",
+        "bits": "6"
+      },
+      {
+        "name": "DP_CEC_LOGICAL_ADDRESS_15",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x03010": {
+    "name": "DP_CEC_RX_MESSAGE_BUFFER",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x03020": {
+    "name": "DP_CEC_TX_MESSAGE_BUFFER",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x03036": {
+    "name": "DP_PCON_HDMI_POST_FRL_STATUS",
+    "fields": [
+      {
+        "name": "DP_PCON_HDMI_LINK_MODE",
+        "bits": "0"
+      },
+      {
+        "name": "DP_PCON_HDMI_FRL_TRAINED_BW",
+        "bits": "6:1"
+      },
+      {
+        "name": "DP_PCON_FRL_TRAINED_BW_9GBPS",
+        "bits": "1"
+      },
+      {
+        "name": "DP_PCON_FRL_TRAINED_BW_18GBPS",
+        "bits": "2"
+      },
+      {
+        "name": "DP_PCON_FRL_TRAINED_BW_24GBPS",
+        "bits": "3"
+      },
+      {
+        "name": "DP_PCON_FRL_TRAINED_BW_32GBPS",
+        "bits": "4"
+      },
+      {
+        "name": "DP_PCON_FRL_TRAINED_BW_40GBPS",
+        "bits": "5"
+      },
+      {
+        "name": "DP_PCON_FRL_TRAINED_BW_48GBPS",
+        "bits": "6"
+      },
+      {
+        "name": "DP_PCON_ENABLE_DSC_ENCODER",
+        "bits": "1"
+      },
+      {
+        "name": "DP_PCON_ENCODER_PPS_OVERRIDE_MASK",
+        "bits": "3:2"
+      },
+      {
+        "name": "DP_CONVERSION_RGB_YCBCR_MASK",
+        "bits": "6:4"
+      },
+      {
+        "name": "DP_CONVERSION_BT601_RGB_YCBCR_ENABLE",
+        "bits": "4"
+      },
+      {
+        "name": "DP_CONVERSION_BT709_RGB_YCBCR_ENABLE",
+        "bits": "5"
+      },
+      {
+        "name": "DP_CONVERSION_BT2020_RGB_YCBCR_ENABLE",
+        "bits": "6"
+      }
+    ]
+  },
+  "0x03037": {
+    "name": "DP_PCON_HDMI_ERROR_STATUS_LN0",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x03038": {
+    "name": "DP_PCON_HDMI_ERROR_STATUS_LN1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x03039": {
+    "name": "DP_PCON_HDMI_ERROR_STATUS_LN2",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x0303a": {
+    "name": "DP_PCON_HDMI_ERROR_STATUS_LN3",
+    "fields": [
+      {
+        "name": "DP_PCON_HDMI_ERROR_COUNT_MASK",
+        "bits": "2:0"
+      },
+      {
+        "name": "DP_PCON_HDMI_ERROR_COUNT_THREE_PLUS",
+        "bits": "0"
+      },
+      {
+        "name": "DP_PCON_HDMI_ERROR_COUNT_TEN_PLUS",
+        "bits": "1"
+      },
+      {
+        "name": "DP_PCON_HDMI_ERROR_COUNT_HUNDRED_PLUS",
+        "bits": "2"
+      }
+    ]
+  },
+  "0x0303b": {
+    "name": "DP_PCON_HDMI_TX_LINK_STATUS",
+    "fields": [
+      {
+        "name": "DP_PCON_HDMI_TX_LINK_ACTIVE",
+        "bits": "0"
+      },
+      {
+        "name": "DP_PCON_FRL_READY",
+        "bits": "1"
+      }
+    ]
+  },
+  "0x03050": {
+    "name": "DP_PROTOCOL_CONVERTER_CONTROL_0",
+    "fields": [
+      {
+        "name": "DP_HDMI_DVI_OUTPUT_CONFIG",
+        "bits": "0"
+      }
+    ]
+  },
+  "0x03051": {
+    "name": "DP_PROTOCOL_CONVERTER_CONTROL_1",
+    "fields": [
+      {
+        "name": "DP_CONVERSION_TO_YCBCR420_ENABLE",
+        "bits": "0"
+      },
+      {
+        "name": "DP_HDMI_EDID_PROCESSING_DISABLE",
+        "bits": "1"
+      },
+      {
+        "name": "DP_HDMI_AUTONOMOUS_SCRAMBLING_DISABLE",
+        "bits": "2"
+      },
+      {
+        "name": "DP_HDMI_FORCE_SCRAMBLING",
+        "bits": "3"
+      }
+    ]
+  },
+  "0x03052": {
+    "name": "DP_PROTOCOL_CONVERTER_CONTROL_2",
+    "fields": [
+      {
+        "name": "DP_CONVERSION_TO_YCBCR422_ENABLE",
+        "bits": "0"
+      },
+      {
+        "name": "DP_PCON_ENABLE_DSC_ENCODER",
+        "bits": "1"
+      },
+      {
+        "name": "DP_PCON_ENCODER_PPS_OVERRIDE_MASK",
+        "bits": "3:2"
+      },
+      {
+        "name": "DP_CONVERSION_RGB_YCBCR_MASK",
+        "bits": "6:4"
+      },
+      {
+        "name": "DP_CONVERSION_BT601_RGB_YCBCR_ENABLE",
+        "bits": "4"
+      },
+      {
+        "name": "DP_CONVERSION_BT709_RGB_YCBCR_ENABLE",
+        "bits": "5"
+      },
+      {
+        "name": "DP_CONVERSION_BT2020_RGB_YCBCR_ENABLE",
+        "bits": "6"
+      }
+    ]
+  },
+  "0x0305a": {
+    "name": "DP_PCON_HDMI_LINK_CONFIG_1",
+    "fields": [
+      {
+        "name": "DP_PCON_ENABLE_MAX_FRL_BW",
+        "bits": "2:0"
+      },
+      {
+        "name": "DP_PCON_ENABLE_SOURCE_CTL_MODE",
+        "bits": "3"
+      },
+      {
+        "name": "DP_PCON_ENABLE_CONCURRENT_LINK",
+        "bits": "4"
+      },
+      {
+        "name": "DP_PCON_ENABLE_SEQUENTIAL_LINK",
+        "bits": "3:4"
+      },
+      {
+        "name": "DP_PCON_ENABLE_LINK_FRL_MODE",
+        "bits": "5"
+      },
+      {
+        "name": "DP_PCON_ENABLE_HPD_READY",
+        "bits": "6"
+      },
+      {
+        "name": "DP_PCON_ENABLE_HDMI_LINK",
+        "bits": "7"
+      }
+    ]
+  },
+  "0x0305b": {
+    "name": "DP_PCON_HDMI_LINK_CONFIG_2",
+    "fields": [
+      {
+        "name": "DP_PCON_MAX_LINK_BW_MASK",
+        "bits": "5:0"
+      },
+      {
+        "name": "DP_PCON_FRL_BW_MASK_9GBPS",
+        "bits": "0"
+      },
+      {
+        "name": "DP_PCON_FRL_BW_MASK_18GBPS",
+        "bits": "1"
+      },
+      {
+        "name": "DP_PCON_FRL_BW_MASK_24GBPS",
+        "bits": "2"
+      },
+      {
+        "name": "DP_PCON_FRL_BW_MASK_32GBPS",
+        "bits": "3"
+      },
+      {
+        "name": "DP_PCON_FRL_BW_MASK_40GBPS",
+        "bits": "4"
+      },
+      {
+        "name": "DP_PCON_FRL_BW_MASK_48GBPS",
+        "bits": "5"
+      },
+      {
+        "name": "DP_PCON_FRL_LINK_TRAIN_EXTENDED",
+        "bits": "6"
+      },
+      {
+        "name": "DP_PCON_FRL_LINK_TRAIN_NORMAL",
+        "bits": "5:6"
+      }
+    ]
+  },
+  "0x03100": {
+    "name": "DP_PCON_HDMI_PPS_OVERRIDE_BASE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x03180": {
+    "name": "DP_PCON_HDMI_PPS_OVRD_SLICE_HEIGHT",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x03182": {
+    "name": "DP_PCON_HDMI_PPS_OVRD_SLICE_WIDTH",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x03184": {
+    "name": "DP_PCON_HDMI_PPS_OVRD_BPP",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x08000": {
+    "name": "DP_LINK_CONSTANT_N_VALUE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x68000": {
+    "name": "DP_AUX_HDCP_BKSV",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x68005": {
+    "name": "DP_AUX_HDCP_RI_PRIME",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x68007": {
+    "name": "DP_AUX_HDCP_AKSV",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x6800c": {
+    "name": "DP_AUX_HDCP_AN",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x68028": {
+    "name": "DP_AUX_HDCP_BCAPS",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x68029": {
+    "name": "DP_AUX_HDCP_BSTATUS",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x6802a": {
+    "name": "DP_AUX_HDCP_BINFO",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x6802c": {
+    "name": "DP_AUX_HDCP_KSV_FIFO",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x6803b": {
+    "name": "DP_AUX_HDCP_AINFO",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69000": {
+    "name": "DP_HDCP_2_2_REG_RTX_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69008": {
+    "name": "DP_HDCP_2_2_REG_TXCAPS_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x6900b": {
+    "name": "DP_HDCP_2_2_REG_CERT_RX_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69215": {
+    "name": "DP_HDCP_2_2_REG_RRX_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x6921d": {
+    "name": "DP_HDCP_2_2_REG_RX_CAPS_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69220": {
+    "name": "DP_HDCP_2_2_REG_EKPUB_KM_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x692a0": {
+    "name": "DP_HDCP_2_2_REG_EKH_KM_WR_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x692b0": {
+    "name": "DP_HDCP_2_2_REG_M_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x692c0": {
+    "name": "DP_HDCP_2_2_REG_HPRIME_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x692e0": {
+    "name": "DP_HDCP_2_2_REG_EKH_KM_RD_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x692f0": {
+    "name": "DP_HDCP_2_2_REG_RN_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x692f8": {
+    "name": "DP_HDCP_2_2_REG_LPRIME_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69318": {
+    "name": "DP_HDCP_2_2_REG_EDKEY_KS_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69328": {
+    "name": "DP_HDCP_2_2_REG_RIV_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69330": {
+    "name": "DP_HDCP_2_2_REG_RXINFO_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69332": {
+    "name": "DP_HDCP_2_2_REG_SEQ_NUM_V_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69335": {
+    "name": "DP_HDCP_2_2_REG_VPRIME_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69345": {
+    "name": "DP_HDCP_2_2_REG_RECV_ID_LIST_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x693e0": {
+    "name": "DP_HDCP_2_2_REG_V_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x693f0": {
+    "name": "DP_HDCP_2_2_REG_SEQ_NUM_M_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x693f3": {
+    "name": "DP_HDCP_2_2_REG_K_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x693f5": {
+    "name": "DP_HDCP_2_2_REG_STREAM_ID_TYPE_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69473": {
+    "name": "DP_HDCP_2_2_REG_MPRIME_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69493": {
+    "name": "DP_HDCP_2_2_REG_RXSTATUS_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69494": {
+    "name": "DP_HDCP_2_2_REG_STREAM_TYPE_OFFSET",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0x69518": {
+    "name": "DP_HDCP_2_2_REG_DBG_OFFSET",
+    "fields": [
+      {
+        "name": "DP_PHY_REPEATER_128B132B_SUPPORTED",
+        "bits": "0"
+      }
+    ]
+  },
+  "0xf0000": {
+    "name": "DP_LT_TUNABLE_PHY_REPEATER_FIELD_DATA_STRUCTURE_REV",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0001": {
+    "name": "DP_MAX_LINK_RATE_PHY_REPEATER",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0002": {
+    "name": "DP_PHY_REPEATER_CNT",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0003": {
+    "name": "DP_PHY_REPEATER_MODE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0004": {
+    "name": "DP_MAX_LANE_COUNT_PHY_REPEATER",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0005": {
+    "name": "DP_PHY_REPEATER_EXTENDED_WAIT_TIMEOUT",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0006": {
+    "name": "DP_MAIN_LINK_CHANNEL_CODING_PHY_REPEATER",
+    "fields": [
+      {
+        "name": "DP_PHY_REPEATER_128B132B_SUPPORTED",
+        "bits": "0"
+      }
+    ]
+  },
+  "0xf0007": {
+    "name": "DP_PHY_REPEATER_128B132B_RATES",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0008": {
+    "name": "DP_PHY_REPEATER_EQ_DONE",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0010": {
+    "name": "DP_TRAINING_PATTERN_SET_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0011": {
+    "name": "DP_TRAINING_LANE0_SET_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0012": {
+    "name": "DP_TRAINING_LANE1_SET_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0013": {
+    "name": "DP_TRAINING_LANE2_SET_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0014": {
+    "name": "DP_TRAINING_LANE3_SET_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0020": {
+    "name": "DP_TRAINING_AUX_RD_INTERVAL_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0021": {
+    "name": "DP_TRANSMITTER_CAPABILITY_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0022": {
+    "name": "DP_128B132B_TRAINING_AUX_RD_INTERVAL_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0030": {
+    "name": "DP_LANE0_1_STATUS_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0031": {
+    "name": "DP_LANE2_3_STATUS_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0032": {
+    "name": "DP_LANE_ALIGN_STATUS_UPDATED_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0033": {
+    "name": "DP_ADJUST_REQUEST_LANE0_1_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0034": {
+    "name": "DP_ADJUST_REQUEST_LANE2_3_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0035": {
+    "name": "DP_SYMBOL_ERROR_COUNT_LANE0_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0037": {
+    "name": "DP_SYMBOL_ERROR_COUNT_LANE1_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0039": {
+    "name": "DP_SYMBOL_ERROR_COUNT_LANE2_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf003b": {
+    "name": "DP_SYMBOL_ERROR_COUNT_LANE3_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0290": {
+    "name": "DP_FEC_STATUS_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0291": {
+    "name": "DP_FEC_ERROR_COUNT_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  },
+  "0xf0294": {
+    "name": "DP_FEC_CAPABILITY_PHY_REPEATER1",
+    "fields": [
+      {
+        "bits": "7:0",
+        "name": "VALUE"
+      }
+    ]
+  }
+}

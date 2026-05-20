@@ -50,6 +50,7 @@ Related files:
 | **UP_REQ** | `0x1600 - 0x17FF` | Read Only | 上行请求缓冲区（Branch/Sink 写，Source 读） |
 
 **驱动代码定义** (`include/drm/display/drm_dp.h`):
+
 ```c
 #define DP_SIDEBAND_MSG_DOWN_REQ_BASE   0x1000   /* DP 1.2 MST */
 #define DP_SIDEBAND_MSG_UP_REP_BASE     0x1200   /* DP 1.2 MST */
@@ -66,13 +67,14 @@ Related files:
 ### 2.3 消息传递流程
 
 **DOWN_REQ_MSG (下行请求)**:
+
 ```
-Source (DPTX) → 写入 DOWN_REQ → 触发 IRQ_HPD → Branch/Sink 读取并执行 → 写入 DOWN_REP → 触发 IRQ_HPD → Source 读取
+Source (DPTX) → 写入 DOWN_REQ → Branch/Sink 读取并执行 → 写入 DOWN_REP → 触发 IRQ_HPD → Source 读取
 ```
 
 **UP_REQ_MSG (上行请求)**:
 ```
-Branch/Sink (DPRX) → 写入 UP_REQ → 触发 IRQ_HPD → Source 读取并执行 → 写入 UP_REP → 触发 IRQ_HPD → Branch/Sink 读取
+Branch/Sink (DPRX) → 写入 UP_REQ → 触发 IRQ_HPD → Source 读取并执行 → 写入 UP_REP → Branch/Sink 读取
 ```
 
 

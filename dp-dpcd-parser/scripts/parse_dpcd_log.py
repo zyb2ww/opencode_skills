@@ -712,8 +712,8 @@ def _parse_link_address_ack(reader):
     if reader.remaining_bits() < 8:
         lines.append("    (insufficient data)")
         return lines, None
-    reader.read_bits(1)  # reserved
-    reader.read_bits(7)  # reserved
+    reader.read_bits(1)  # Reply_Type (0=ACK)
+    reader.read_bits(7)  # Request_Identifier (0x01)
     if reader.remaining_bits() < 128 + 8:
         lines.append("    (insufficient data for GUID + nports)")
         return lines, None
@@ -792,6 +792,7 @@ def _parse_connection_status_notify_request(reader):
     if reader.remaining_bits() < 16 + 128 + 8:
         lines.append("    (insufficient data)")
         return lines
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
     reader.read_bits(4)
     guid, guid_spec = reader.read_bytes(16)
@@ -811,10 +812,10 @@ def _parse_connection_status_notify_request(reader):
 
 def _parse_enum_path_resources_ack(reader):
     lines = []
-    if reader.remaining_bits() < 40:
+    if reader.remaining_bits() < 48:
         lines.append("    (insufficient data)")
         return lines
-    reader.read_bits(4)
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
     reader.read_bits(3)
     fec, fec_spec = reader.read_bits(1)
@@ -829,9 +830,10 @@ def _parse_enum_path_resources_ack(reader):
 
 def _parse_allocate_payload_request(reader):
     lines = []
-    if reader.remaining_bits() < 40:
+    if reader.remaining_bits() < 48:
         lines.append("    (insufficient data)")
         return lines
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
     n_sdp, nsdp_spec = reader.read_bits(4)
     reader.read_bits(1)
@@ -851,10 +853,10 @@ def _parse_allocate_payload_request(reader):
 
 def _parse_allocate_payload_ack(reader):
     lines = []
-    if reader.remaining_bits() < 40:
+    if reader.remaining_bits() < 48:
         lines.append("    (insufficient data)")
         return lines
-    reader.read_bits(4)
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
     reader.read_bits(5)
     vc_id, vc_spec = reader.read_bits(7)
@@ -867,12 +869,12 @@ def _parse_allocate_payload_ack(reader):
 
 def _parse_query_payload_ack(reader):
     lines = []
-    if reader.remaining_bits() < 32:
+    if reader.remaining_bits() < 40:
         lines.append("    (insufficient data)")
         return lines
-    reader.read_bits(4)
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
-    reader.read_bits(8)
+    reader.read_bits(4)  # zeros
     alloc_pbn, pbn_spec = reader.read_bits(16)
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
     lines.append(f"    Allocated_PBN[{pbn_spec}]: {alloc_pbn}")
@@ -884,6 +886,7 @@ def _parse_resource_status_notify_request(reader):
     if reader.remaining_bits() < 16 + 128 + 16:
         lines.append("    (insufficient data)")
         return lines
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
     reader.read_bits(4)
     guid, guid_spec = reader.read_bytes(16)
@@ -896,9 +899,10 @@ def _parse_resource_status_notify_request(reader):
 
 def _parse_remote_dpcd_read_request(reader):
     lines = []
-    if reader.remaining_bits() < 40:
+    if reader.remaining_bits() < 48:
         lines.append("    (insufficient data)")
         return lines
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
     dpcd_addr, addr_spec = reader.read_bits(20)
     n_bytes, nb_spec = reader.read_byte()
@@ -910,10 +914,11 @@ def _parse_remote_dpcd_read_request(reader):
 
 def _parse_remote_dpcd_read_ack(reader):
     lines = []
-    if reader.remaining_bits() < 24:
+    if reader.remaining_bits() < 32:
         lines.append("    (insufficient data)")
         return lines
-    reader.read_bits(4)
+    reader.read_byte()  # Skip Request ID byte
+    reader.read_bits(4)  # zeros
     port_num, pn_spec = reader.read_bits(4)
     n_read, nr_spec = reader.read_byte()
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
@@ -927,9 +932,10 @@ def _parse_remote_dpcd_read_ack(reader):
 
 def _parse_remote_dpcd_write_request(reader):
     lines = []
-    if reader.remaining_bits() < 32:
+    if reader.remaining_bits() < 40:
         lines.append("    (insufficient data)")
         return lines
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
     dpcd_addr, addr_spec = reader.read_bits(20)
     n_bytes, nb_spec = reader.read_byte()
@@ -945,10 +951,11 @@ def _parse_remote_dpcd_write_request(reader):
 
 def _parse_remote_dpcd_write_ack(reader):
     lines = []
-    if reader.remaining_bits() < 16:
+    if reader.remaining_bits() < 24:
         lines.append("    (insufficient data)")
         return lines
-    reader.read_bits(4)
+    reader.read_byte()  # Skip Request ID byte
+    reader.read_bits(4)  # zeros
     port_num, pn_spec = reader.read_bits(4)
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
     return lines
@@ -956,44 +963,50 @@ def _parse_remote_dpcd_write_ack(reader):
 
 def _parse_remote_i2c_read_request(reader):
     lines = []
-    if reader.remaining_bits() < 16:
+    if reader.remaining_bits() < 24:
         lines.append("    (insufficient data)")
         return lines
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
     reader.read_bits(2)
-    n_trans, nt_spec = reader.read_bits(2)
+    n_trans_enc, nt_spec = reader.read_bits(2)
+    n_trans = n_trans_enc + 1  # DP spec: field value is (N-1), actual count is N
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
-    lines.append(f"    Number_Of_I2C_Transactions[{nt_spec}]: {n_trans}")
+    lines.append(f"    Number_Of_I2C_Transactions[{nt_spec}]: {n_trans} (encoded={n_trans_enc})")
     for i in range(n_trans - 1):
         if reader.remaining_bits() < 16:
             break
         reader.read_bits(1)
-        dev_id, _ = reader.read_bits(7)
-        n_write, _ = reader.read_byte()
+        dev_id, dev_spec = reader.read_bits(7)
+        n_write, nw_spec = reader.read_byte()
         lines.append(f"    I2C_Write[{i}]: Device=0x{dev_id:02x} Bytes={n_write}")
-        write_data, _ = reader.read_bytes(min(n_write, reader.remaining_bits() // 8))
+        write_data, wd_spec = reader.read_bytes(min(n_write, reader.remaining_bits() // 8))
         if write_data:
             lines.append(f"    I2C_Write_Data[{i}]: {' '.join(f'{b:02x}' for b in write_data)}")
         if reader.remaining_bits() < 8:
             break
         reader.read_bits(3)
-        reader.read_bits(1)
-        reader.read_bits(4)
+        no_stop, ns_spec = reader.read_bits(1)
+        delay, dly_spec = reader.read_bits(4)
+        lines.append(f"    No_Stop_Bit[{ns_spec}]: {no_stop} (no STOP if 1)")
+        if delay:
+            lines.append(f"    I2C_Transaction_Delay[{dly_spec}]: {delay} us")
     if reader.remaining_bits() < 16:
         return lines
     reader.read_bits(1)
-    dev_id, _ = reader.read_bits(7)
-    n_read, _ = reader.read_byte()
+    dev_id, dev_spec = reader.read_bits(7)
+    n_read, nr_spec = reader.read_byte()
     lines.append(f"    I2C_Read: Device=0x{dev_id:02x} Bytes={n_read}")
     return lines
 
 
 def _parse_remote_i2c_read_ack(reader):
     lines = []
-    if reader.remaining_bits() < 24:
+    if reader.remaining_bits() < 32:
         lines.append("    (insufficient data)")
         return lines
-    reader.read_bits(4)
+    reader.read_byte()  # Skip Request ID byte
+    reader.read_bits(4)  # zeros
     port_num, pn_spec = reader.read_bits(4)
     n_read, nr_spec = reader.read_byte()
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
@@ -1009,9 +1022,10 @@ def _parse_remote_i2c_read_ack(reader):
 
 def _parse_remote_i2c_write_request(reader):
     lines = []
-    if reader.remaining_bits() < 24:
+    if reader.remaining_bits() < 32:
         lines.append("    (insufficient data)")
         return lines
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
     reader.read_bits(5)
     dev_id, dev_spec = reader.read_bits(7)
@@ -1027,10 +1041,11 @@ def _parse_remote_i2c_write_request(reader):
 
 def _parse_remote_i2c_write_ack(reader):
     lines = []
-    if reader.remaining_bits() < 16:
+    if reader.remaining_bits() < 24:
         lines.append("    (insufficient data)")
         return lines
-    reader.read_bits(4)
+    reader.read_byte()  # Skip Request ID byte
+    reader.read_bits(4)  # zeros
     port_num, pn_spec = reader.read_bits(4)
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
     return lines
@@ -1038,9 +1053,10 @@ def _parse_remote_i2c_write_ack(reader):
 
 def _parse_power_phy_request(reader):
     lines = []
-    if reader.remaining_bits() < 16:
+    if reader.remaining_bits() < 24:
         lines.append("    (insufficient data)")
         return lines
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
     reader.read_bits(4)
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
@@ -1049,10 +1065,10 @@ def _parse_power_phy_request(reader):
 
 def _parse_power_phy_ack(reader):
     lines = []
-    if reader.remaining_bits() < 16:
+    if reader.remaining_bits() < 24:
         lines.append("    (insufficient data)")
         return lines
-    reader.read_bits(4)
+    reader.read_byte()  # Skip Request ID byte
     port_num, pn_spec = reader.read_bits(4)
     lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
     return lines
@@ -1060,9 +1076,10 @@ def _parse_power_phy_ack(reader):
 
 def _parse_nak_detail(reader):
     lines = []
-    if reader.remaining_bits() < 128 + 16:
+    if reader.remaining_bits() < 128 + 24:
         lines.append("    (insufficient data for NAK)")
         return lines
+    reader.read_byte()  # Skip Reply_Type + Request_ID byte
     guid, guid_spec = reader.read_bytes(16)
     reason, reason_spec = reader.read_byte()
     nak_data, nd_spec = reader.read_byte()
@@ -1140,7 +1157,8 @@ def parse_mt_detail(msg):
             lines.extend(_parse_connection_status_notify_request(reader))
         elif req_id == 0x10:
             lines.append("  ENUM_PATH_RESOURCES Request detail:")
-            if reader.remaining_bits() >= 8:
+            if reader.remaining_bits() >= 16:
+                reader.read_byte()  # Skip Request ID byte
                 port_num, pn_spec = reader.read_bits(4)
                 lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
         elif req_id == 0x11:
@@ -1148,7 +1166,8 @@ def parse_mt_detail(msg):
             lines.extend(_parse_allocate_payload_request(reader))
         elif req_id == 0x12:
             lines.append("  QUERY_PAYLOAD Request detail:")
-            if reader.remaining_bits() >= 24:
+            if reader.remaining_bits() >= 32:
+                reader.read_byte()  # Skip Request ID byte
                 port_num, pn_spec = reader.read_bits(4)
                 reader.read_bits(5)
                 vc_id, vc_spec = reader.read_bits(7)
@@ -1179,7 +1198,8 @@ def parse_mt_detail(msg):
             lines.extend(_parse_power_phy_request(reader))
         elif req_id == 0x00:
             lines.append("  GET_MESSAGE_TRANSACTION_VERSION Request:")
-            if reader.remaining_bits() >= 8:
+            if reader.remaining_bits() >= 16:
+                reader.read_byte()  # Skip Request ID byte
                 port_num, pn_spec = reader.read_bits(4)
                 lines.append(f"    Port_Number[{pn_spec}]: {port_num}")
         else:
